@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2"
-            fx:controller="com.training.carfactory.controller.ApplicationController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.training.carfactory.controller.ApplicationController">
   <children>
     <AnchorPane fx:id="menu" layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="599.9999000000025" visible="true">
       <children>
@@ -21,7 +20,7 @@
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="108.0" text="Model" />
           </columns>
         </TableView>
-        <Button layoutX="436.0" layoutY="342.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Create car" />
+        <Button layoutX="436.0" layoutY="342.0" mnemonicParsing="false" onAction="#toBodyStepPage" prefHeight="50.0" prefWidth="150.0" text="Create car" />
         <Button layoutX="14.0" layoutY="342.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Exit" />
         <Label layoutX="199.0" layoutY="8.0" text="Car factory">
           <font>
@@ -30,7 +29,7 @@
         </Label>
       </children>
     </AnchorPane>
-    <AnchorPane fx:id="body_step" layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0" visible="false">
+    <AnchorPane fx:id="bodyStep" layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0" visible="false">
       <children>
         <ComboBox layoutX="154.0" layoutY="85.0" prefHeight="21.0" prefWidth="268.0">
           <items>
@@ -42,8 +41,8 @@
           </items>
         </ComboBox>
         <ImageView fitHeight="195.75" fitWidth="261.0" layoutX="154.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" />
-        <Button layoutX="436.0" layoutY="328.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Next step" />
-        <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Back" />
+        <Button layoutX="436.0" layoutY="328.0" mnemonicParsing="false" onAction="#toEngineStepPage" prefHeight="50.0" prefWidth="150.0" text="Next step" />
+        <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#toPreviousPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
         <Label layoutX="195.0" layoutY="22.0" text="Choose a body">
           <font>
             <Font size="32.0" fx:id="x1" />
@@ -51,7 +50,7 @@
         </Label>
       </children>
     </AnchorPane>
-    <AnchorPane fx:id="engine_step" layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0" visible="false">
+    <AnchorPane fx:id="engineStep" layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0" visible="false">
       <children>
         <ComboBox layoutX="154.0" layoutY="85.0" prefHeight="21.0" prefWidth="268.0">
           <items>
@@ -63,12 +62,12 @@
           </items>
         </ComboBox>
         <ImageView fitHeight="195.75" fitWidth="261.0" layoutX="154.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" />
-        <Button layoutX="436.0" layoutY="328.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Next step" />
-        <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Back" />
+        <Button layoutX="436.0" layoutY="328.0" mnemonicParsing="false" onAction="#toWheelsStepPage" prefHeight="50.0" prefWidth="150.0" text="Next step" />
+        <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#toPreviousPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
         <Label font="$x1" layoutX="158.0" layoutY="22.0" text="Choose an engine" />
       </children>
     </AnchorPane>
-    <AnchorPane fx:id="wheels_step" layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0" visible="false">
+    <AnchorPane fx:id="wheelsStep" layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0" visible="false">
       <children>
         <ComboBox layoutX="154.0" layoutY="85.0" prefHeight="21.0" prefWidth="268.0">
           <items>
@@ -80,8 +79,8 @@
           </items>
         </ComboBox>
         <ImageView fitHeight="195.75" fitWidth="261.0" layoutX="154.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" />
-        <Button layoutX="436.0" layoutY="328.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Finish" />
-        <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Back" />
+        <Button id="finish" layoutX="436.0" layoutY="328.0" mnemonicParsing="false" onAction="#finishCar" prefHeight="50.0" prefWidth="150.0" text="Finish" />
+        <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#toPreviousPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
         <Label font="$x1" layoutX="170.0" layoutY="22.0" text="Choose a wheels" />
       </children>
     </AnchorPane>
