@@ -15,8 +15,8 @@ public class DefaultPageServiceTest {
 
     @Before
     public void setUp(){
-        pageContext = PageContext.getInstance();
-        defaultPageService = new DefaultPageService();
+        pageContext = new PageContext();
+        defaultPageService = new DefaultPageService(pageContext);
     }
 
     @Test

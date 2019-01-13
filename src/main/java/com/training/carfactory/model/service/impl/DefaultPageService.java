@@ -9,7 +9,11 @@ import java.util.LinkedList;
 
 public class DefaultPageService implements PageService {
 
-    private PageContext pageContext = PageContext.getInstance();
+    private PageContext pageContext;
+
+    public DefaultPageService(PageContext pageContext) {
+        this.pageContext = pageContext;
+    }
 
     @Override
     public Node getCurrentPage() {

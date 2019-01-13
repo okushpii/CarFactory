@@ -1,8 +1,8 @@
 package com.training.carfactory.controller;
 
+import com.training.carfactory.model.service.BodyService;
 import com.training.carfactory.model.service.PageService;
-import com.training.carfactory.model.service.impl.DefaultPageService;
-import javafx.event.ActionEvent;
+import com.training.carfactory.model.service.context.ApplicationContext;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
@@ -21,9 +21,11 @@ public class ApplicationController {
     @FXML
     private AnchorPane wheelsStep;
 
-    private PageService pageService = new DefaultPageService();
+    private PageService pageService;
+    private BodyService bodyService;
 
     public void initialize(){
+        ApplicationContext.getInstance().initController(this);
         pageService.setCurrentPage(menu);
     }
 
@@ -51,5 +53,13 @@ public class ApplicationController {
         source.setVisible(false);
         target.setVisible(true);
         pageService.setCurrentPage(target);
+    }
+
+    public void setPageService(PageService pageService) {
+        this.pageService = pageService;
+    }
+
+    public void setBodyService(BodyService bodyService) {
+        this.bodyService = bodyService;
     }
 }
