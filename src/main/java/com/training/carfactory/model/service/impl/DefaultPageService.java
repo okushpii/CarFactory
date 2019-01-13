@@ -12,35 +12,12 @@ public class DefaultPageService implements PageService {
     private PageContext pageContext = PageContext.getInstance();
 
     @Override
-    public void initializePages(Node... nodes) {
-        pageContext.setNodes(new LinkedList<>(Arrays.asList(nodes)));
-    }
-
-    @Override
     public Node getCurrentPage() {
-        return pageContext.getNodes().
-                get(pageContext.getCurrentNodeIndex());
+        return pageContext.getCurrentPage();
     }
 
     @Override
-    public Node getNextPage() {
-        int index = getIndex();
-        pageContext.setCurrentNodeIndex(index);
-        return pageContext.getNodes().get(index);
-    }
-
-    @Override
-    public Node getPreviousPage() {
-        int index = pageContext.getCurrentNodeIndex() - 1;
-        pageContext.setCurrentNodeIndex(index);
-        return pageContext.getNodes().get(index);
-    }
-
-    private int getIndex() {
-        int index = 0;
-        if (pageContext.getCurrentNodeIndex() + 1 < pageContext.getNodes().size()){
-            index = pageContext.getCurrentNodeIndex() + 1;
-        }
-        return index;
+    public void setCurrentPage(Node node) {
+        pageContext.setCurrentPage(node);
     }
 }

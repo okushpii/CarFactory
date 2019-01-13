@@ -42,7 +42,7 @@
         </ComboBox>
         <ImageView fitHeight="195.75" fitWidth="261.0" layoutX="154.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" />
         <Button layoutX="436.0" layoutY="328.0" mnemonicParsing="false" onAction="#toEngineStepPage" prefHeight="50.0" prefWidth="150.0" text="Next step" />
-        <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#toPreviousPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
+        <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#toMenu" prefHeight="50.0" prefWidth="150.0" text="Back" />
         <Label layoutX="195.0" layoutY="22.0" text="Choose a body">
           <font>
             <Font size="32.0" fx:id="x1" />
@@ -63,7 +63,7 @@
         </ComboBox>
         <ImageView fitHeight="195.75" fitWidth="261.0" layoutX="154.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" />
         <Button layoutX="436.0" layoutY="328.0" mnemonicParsing="false" onAction="#toWheelsStepPage" prefHeight="50.0" prefWidth="150.0" text="Next step" />
-        <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#toPreviousPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
+        <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#toBodyStepPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
         <Label font="$x1" layoutX="158.0" layoutY="22.0" text="Choose an engine" />
       </children>
     </AnchorPane>
@@ -80,7 +80,7 @@
         </ComboBox>
         <ImageView fitHeight="195.75" fitWidth="261.0" layoutX="154.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" />
         <Button id="finish" layoutX="436.0" layoutY="328.0" mnemonicParsing="false" onAction="#finishCar" prefHeight="50.0" prefWidth="150.0" text="Finish" />
-        <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#toPreviousPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
+        <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#toEngineStepPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
         <Label font="$x1" layoutX="170.0" layoutY="22.0" text="Choose a wheels" />
       </children>
     </AnchorPane>

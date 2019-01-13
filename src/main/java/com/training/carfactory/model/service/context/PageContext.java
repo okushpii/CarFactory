@@ -7,8 +7,7 @@ import java.util.LinkedList;
 public class PageContext {
 
     private static PageContext instance;
-    private int currentNodeIndex;
-    private LinkedList<Node> nodes;
+    private Node currentPage;
 
     private PageContext(){
     }
@@ -19,20 +18,11 @@ public class PageContext {
         }
         return instance;
     }
-
-    public int getCurrentNodeIndex() {
-        return currentNodeIndex;
+    public Node getCurrentPage() {
+        return currentPage;
     }
 
-    public void setCurrentNodeIndex(int currentNodeIndex) {
-        this.currentNodeIndex = currentNodeIndex;
-    }
-
-    public LinkedList<Node> getNodes() {
-        return nodes;
-    }
-
-    public void setNodes(LinkedList<Node> nodes) {
-        this.nodes = nodes;
+    public void setCurrentPage(Node currentPage) {
+        this.currentPage = currentPage;
     }
 }

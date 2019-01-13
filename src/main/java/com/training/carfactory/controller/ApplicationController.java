@@ -2,7 +2,9 @@ package com.training.carfactory.controller;
 
 import com.training.carfactory.model.service.PageService;
 import com.training.carfactory.model.service.impl.DefaultPageService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 
 public class ApplicationController {
@@ -21,43 +23,33 @@ public class ApplicationController {
 
     private PageService pageService = new DefaultPageService();
 
-    @FXML
     public void initialize(){
-        pageService.initializePages(menu, bodyStep, engineStep, wheelsStep);
+        pageService.setCurrentPage(menu);
     }
 
-    @FXML
     public void toBodyStepPage(){
-        switchToNextPage();
+        switchPages(pageService.getCurrentPage(), bodyStep);
     }
 
-    @FXML
     public void toEngineStepPage(){
-       switchToNextPage();
+        switchPages(pageService.getCurrentPage(), engineStep);
     }
 
-    @FXML
     public void toWheelsStepPage(){
-       switchToNextPage();
+        switchPages(pageService.getCurrentPage(), wheelsStep);
     }
 
-    @FXML
-    public void toPreviousPage(){
-        switchToPreviousPage();
+    public void toMenu() {
+        switchPages(pageService.getCurrentPage(), menu);
     }
 
     public void finishCar(){
-        switchToNextPage();
+        switchPages(pageService.getCurrentPage(), menu);
     }
 
-    private void switchToNextPage(){
-        pageService.getCurrentPage().setVisible(false);
-        pageService.getNextPage().setVisible(true);
+    private void switchPages(Node source, Node target){
+        source.setVisible(false);
+        target.setVisible(true);
+        pageService.setCurrentPage(target);
     }
-
-    private void switchToPreviousPage(){
-        pageService.getCurrentPage().setVisible(false);
-        pageService.getPreviousPage().setVisible(true);
-    }
-
 }
