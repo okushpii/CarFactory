@@ -8,9 +8,9 @@ public class Body {
     private Long price;
 
     public enum Type{
-        NEW,
-        IN_PROGRESS,
-        DONE
+        SEDAN,
+        CROSSOVER,
+        COUPE
     }
 
     public Body(Long id, String name, Type type, Long price) {
@@ -18,6 +18,9 @@ public class Body {
         this.name = name;
         this.type = type;
         this.price = price;
+    }
+
+    public Body(){
     }
 
     public Long getId() {
