@@ -4,7 +4,7 @@ import javafx.scene.Node;
 
 public interface PageService {
 
-    Node getCurrentPage();
+    void switchToPage(Node target);
 
-    void setCurrentPage(Node node);
+    void setCurrentPage(Node page);
 }

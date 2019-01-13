@@ -1,11 +1,10 @@
 package com.training.carfactory.model.service.impl;
 
-import com.training.carfactory.model.service.context.PageContext;
 import com.training.carfactory.model.service.PageService;
+import com.training.carfactory.model.service.context.PageContext;
 import javafx.scene.Node;
 
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 public class DefaultPageService implements PageService {
 
@@ -16,12 +15,21 @@ public class DefaultPageService implements PageService {
     }
 
     @Override
-    public Node getCurrentPage() {
-        return pageContext.getCurrentPage();
+    public void switchToPage(Node target){
+        checkCurrentPagePresence();
+        pageContext.getCurrentPage().setVisible(false);
+        target.setVisible(true);
+        pageContext.setCurrentPage(target);
     }
 
     @Override
-    public void setCurrentPage(Node node) {
-        pageContext.setCurrentPage(node);
+    public void setCurrentPage(Node page) {
+        pageContext.setCurrentPage(page);
+    }
+
+    private void checkCurrentPagePresence() {
+        if (pageContext.getCurrentPage() == null){
+            throw new NoSuchElementException("Current node was not initialized");
+        }
     }
 }

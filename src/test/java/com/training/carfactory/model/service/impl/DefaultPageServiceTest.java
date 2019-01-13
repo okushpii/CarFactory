@@ -5,6 +5,8 @@ import javafx.scene.layout.AnchorPane;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.assertEquals;
 
 public class DefaultPageServiceTest {
@@ -20,10 +22,18 @@ public class DefaultPageServiceTest {
     }
 
     @Test
-    public void shouldGetCurrentPage(){
+    public void shouldSwitchToPage(){
         AnchorPane currentPage = new AnchorPane();
-        pageContext.setCurrentPage(currentPage);
-        assertEquals(currentPage, defaultPageService.getCurrentPage());
+        AnchorPane target = new AnchorPane();
+        defaultPageService.setCurrentPage(currentPage);
+        defaultPageService.switchToPage(target);
+        assertEquals(target, pageContext.getCurrentPage());
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void shouldSwitchPageWhenCurrentPageIsAbsent(){
+        AnchorPane target = new AnchorPane();
+        defaultPageService.switchToPage(target);
     }
 
     @Test

@@ -4,7 +4,6 @@ import com.training.carfactory.model.service.BodyService;
 import com.training.carfactory.model.service.PageService;
 import com.training.carfactory.model.service.context.ApplicationContext;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 
 public class ApplicationController {
@@ -30,29 +29,23 @@ public class ApplicationController {
     }
 
     public void toBodyStepPage(){
-        switchPages(pageService.getCurrentPage(), bodyStep);
+        pageService.switchToPage(bodyStep);
     }
 
     public void toEngineStepPage(){
-        switchPages(pageService.getCurrentPage(), engineStep);
+        pageService.switchToPage(engineStep);
     }
 
     public void toWheelsStepPage(){
-        switchPages(pageService.getCurrentPage(), wheelsStep);
+        pageService.switchToPage(wheelsStep);
     }
 
     public void toMenu() {
-        switchPages(pageService.getCurrentPage(), menu);
+        pageService.switchToPage(menu);
     }
 
     public void finishCar(){
-        switchPages(pageService.getCurrentPage(), menu);
-    }
-
-    private void switchPages(Node source, Node target){
-        source.setVisible(false);
-        target.setVisible(true);
-        pageService.setCurrentPage(target);
+        pageService.switchToPage(menu);
     }
 
     public void setPageService(PageService pageService) {
