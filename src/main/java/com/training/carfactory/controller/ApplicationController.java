@@ -1,6 +1,7 @@
 package com.training.carfactory.controller;
 
 import com.training.carfactory.model.service.BodyService;
+import com.training.carfactory.model.service.EngineService;
 import com.training.carfactory.model.service.PageService;
 import com.training.carfactory.model.service.context.ApplicationContext;
 import javafx.fxml.FXML;
@@ -22,6 +23,7 @@ public class ApplicationController {
 
     private PageService pageService;
     private BodyService bodyService;
+    private EngineService engineService;
 
     public void initialize(){
         ApplicationContext.getInstance().initController(this);
@@ -55,4 +57,6 @@ public class ApplicationController {
     public void setBodyService(BodyService bodyService) {
         this.bodyService = bodyService;
     }
+
+    public void setEngineService(EngineService engineService){this.engineService = engineService;}
 }

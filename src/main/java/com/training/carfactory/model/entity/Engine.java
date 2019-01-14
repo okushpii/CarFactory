@@ -16,6 +16,9 @@ public class Engine {
         this.price = price;
     }
 
+    public Engine() {
+    }
+
     public Long getId() {
         return id;
     }
