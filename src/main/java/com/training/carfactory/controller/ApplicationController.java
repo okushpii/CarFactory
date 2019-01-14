@@ -1,10 +1,9 @@
 package com.training.carfactory.controller;
 
-import com.training.carfactory.model.service.BodyService;
-import com.training.carfactory.model.service.EngineService;
-import com.training.carfactory.model.service.PageService;
+import com.training.carfactory.controller.facade.ApplicationFacade;
 import com.training.carfactory.model.service.context.ApplicationContext;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 
 public class ApplicationController {
@@ -21,42 +20,37 @@ public class ApplicationController {
     @FXML
     private AnchorPane wheelsStep;
 
-    private PageService pageService;
-    private BodyService bodyService;
-    private EngineService engineService;
+    @FXML
+    private ComboBox<String> bodiesList;
+
+    private ApplicationFacade applicationFacade;
 
     public void initialize(){
         ApplicationContext.getInstance().initController(this);
-        pageService.setCurrentPage(menu);
+        applicationFacade.init(menu, bodiesList);
     }
 
     public void toBodyStepPage(){
-        pageService.switchToPage(bodyStep);
+        applicationFacade.toBodyStage(bodyStep);
     }
 
     public void toEngineStepPage(){
-        pageService.switchToPage(engineStep);
+        applicationFacade.toEngineStage(engineStep);
     }
 
     public void toWheelsStepPage(){
-        pageService.switchToPage(wheelsStep);
+        applicationFacade.toWheelsStage(wheelsStep);
     }
 
     public void toMenu() {
-        pageService.switchToPage(menu);
+        applicationFacade.toMenu(menu);
     }
 
     public void finishCar(){
-        pageService.switchToPage(menu);
+        applicationFacade.finishCar(menu);
     }
 
-    public void setPageService(PageService pageService) {
-        this.pageService = pageService;
+    public void setApplicationFacade(ApplicationFacade applicationFacade) {
+        this.applicationFacade = applicationFacade;
     }
-
-    public void setBodyService(BodyService bodyService) {
-        this.bodyService = bodyService;
-    }
-
-    public void setEngineService(EngineService engineService){this.engineService = engineService;}
 }
