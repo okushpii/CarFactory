@@ -4,5 +4,7 @@ import javafx.scene.control.ComboBox;
 
 public interface ElementService {
 
-    void initElements(ComboBox<String> bodiesList);
+    void initBodyElements(ComboBox<String> bodiesList);
+    void initEngineElements(ComboBox<String> enginesList);
+    void initWheelsElements(ComboBox<String> wheelsList);
 }

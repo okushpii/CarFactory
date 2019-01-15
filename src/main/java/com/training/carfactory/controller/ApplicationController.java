@@ -23,11 +23,18 @@ public class ApplicationController {
     @FXML
     private ComboBox<String> bodiesList;
 
+    @FXML
+    private ComboBox<String> enginesList;
+
+    @FXML
+    private ComboBox<String> wheelsList;
+
+
     private ApplicationFacade applicationFacade;
 
     public void initialize(){
         ApplicationContext.getInstance().initController(this);
-        applicationFacade.init(menu, bodiesList);
+        applicationFacade.init(menu, bodiesList, enginesList, wheelsList);
     }
 
     public void toBodyStepPage(){

@@ -15,9 +15,11 @@ public class ApplicationFacade {
         this.elementService = elementService;
     }
 
-    public void init(Node initialPage, ComboBox<String> bodiesList){
+    public void init(Node initialPage, ComboBox<String> bodiesList, ComboBox<String> enginesList, ComboBox<String> wheelsList){
         pageService.setCurrentPage(initialPage);
-        elementService.initElements(bodiesList);
+        elementService.initBodyElements(bodiesList);
+        elementService.initEngineElements(enginesList);
+        elementService.initWheelsElements(wheelsList);
     }
 
     public void toMenu(Node nextNode){
