@@ -4,17 +4,13 @@ import com.training.carfactory.controller.ApplicationController;
 import com.training.carfactory.controller.facade.ApplicationFacade;
 import com.training.carfactory.model.dao.BodyDao;
 import com.training.carfactory.model.dao.EngineDao;
+import com.training.carfactory.model.dao.WheelsDao;
 import com.training.carfactory.model.dao.impl.DefaultBodyDao;
 import com.training.carfactory.model.dao.impl.DefaultEngineDao;
+import com.training.carfactory.model.dao.impl.DefaultWheelsDao;
 import com.training.carfactory.model.dao.util.ConnectionFactory;
-import com.training.carfactory.model.service.BodyService;
-import com.training.carfactory.model.service.ElementService;
-import com.training.carfactory.model.service.EngineService;
-import com.training.carfactory.model.service.PageService;
-import com.training.carfactory.model.service.impl.DefaultBodyService;
-import com.training.carfactory.model.service.impl.DefaultElementService;
-import com.training.carfactory.model.service.impl.DefaultEngineService;
-import com.training.carfactory.model.service.impl.DefaultPageService;
+import com.training.carfactory.model.service.*;
+import com.training.carfactory.model.service.impl.*;
 
 public class ApplicationContext {
 
@@ -27,6 +23,8 @@ public class ApplicationContext {
 
     private void initContext() {
         ConnectionFactory connectionFactory = new ConnectionFactory();
+        WheelsDao wheelsDao = new DefaultWheelsDao(connectionFactory);
+        WheelsService wheelsService = new DefaultWheelsService(wheelsDao);
         EngineDao engineDao = new DefaultEngineDao(connectionFactory);
         EngineService engineService = new DefaultEngineService(engineDao);
         BodyDao bodyDao = new DefaultBodyDao(connectionFactory);
