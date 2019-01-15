@@ -31,7 +31,7 @@ public class ApplicationContext {
         BodyService bodyService = new DefaultBodyService(bodyDao);
         PageContext pageContext = new PageContext();
         PageService pageService = new DefaultPageService(pageContext);
-        ElementService elementService = new DefaultElementService(bodyService);
+        ElementService elementService = new DefaultElementService(bodyService, engineService, wheelsService);
         applicationFacade = new ApplicationFacade(pageService, elementService);
 
     }
