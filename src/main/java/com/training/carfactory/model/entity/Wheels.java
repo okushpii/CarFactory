@@ -14,6 +14,9 @@ public class Wheels {
         this.price = price;
     }
 
+    public Wheels() {
+    }
+
     public Long getId() {
         return id;
     }

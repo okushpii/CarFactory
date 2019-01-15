@@ -33,7 +33,7 @@ public class DefaultEngineDao implements EngineDao {
                 engine.setPrice(rs.getLong(4));
                 engine.setVolume(rs.getLong(5));
                 engines.add(engine);
-        }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
