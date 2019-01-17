@@ -10,6 +10,10 @@ public class Car {
     private Status status;
     private Long price;
 
+    public Car() {
+
+    }
+
     public enum Status{
         NEW,
         IN_PROGRESS,
