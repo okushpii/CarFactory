@@ -1,33 +1,38 @@
 package com.training.carfactory.controller;
 
 import com.training.carfactory.controller.facade.ApplicationFacade;
+import com.training.carfactory.model.entity.Body;
 import com.training.carfactory.model.service.context.ApplicationContext;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 public class ApplicationController {
 
     @FXML
     private AnchorPane menu;
-
     @FXML
     private AnchorPane bodyStep;
-
     @FXML
     private AnchorPane engineStep;
-
     @FXML
     private AnchorPane wheelsStep;
-
     @FXML
     private ComboBox<String> bodiesList;
-
     @FXML
     private ComboBox<String> enginesList;
-
     @FXML
     private ComboBox<String> wheelsList;
+    @FXML
+    private Pane bodyDetailsPane;
+    @FXML
+    private Label bodyNameLabel;
+    @FXML
+    private Label bodyTypeLabel;
+    @FXML
+    private Label bodyPriceLabel;
 
 
     private ApplicationFacade applicationFacade;
@@ -55,6 +60,11 @@ public class ApplicationController {
 
     public void finishCar(){
         applicationFacade.finishCar(menu);
+    }
+
+    public void chooseBody(){
+        applicationFacade.chooseBody(bodyDetailsPane, bodyNameLabel,
+                bodyTypeLabel, bodyPriceLabel, bodiesList);
     }
 
     public void setApplicationFacade(ApplicationFacade applicationFacade) {

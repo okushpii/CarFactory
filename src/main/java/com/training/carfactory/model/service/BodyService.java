@@ -7,4 +7,6 @@ import java.util.List;
 public interface BodyService {
 
     List<Body> getAll();
+
+    Body getByName(String name);
 }

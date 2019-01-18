@@ -31,15 +31,7 @@
     </AnchorPane>
     <AnchorPane fx:id="bodyStep" layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0" visible="false">
       <children>
-        <ComboBox fx:id="bodiesList" layoutX="154.0" layoutY="85.0" prefHeight="21.0" prefWidth="268.0">
-          <items>
-            <FXCollections fx:factory="observableArrayList">
-              <String fx:value="Item 1" />
-              <String fx:value="Item 2" />
-              <String fx:value="Item 3" />
-            </FXCollections>
-          </items>
-        </ComboBox>
+        <ComboBox fx:id="bodiesList" layoutX="154.0" layoutY="85.0" prefHeight="21.0" prefWidth="268.0" onAction="#chooseBody"/>
         <ImageView fitHeight="195.75" fitWidth="261.0" layoutX="154.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" />
         <Button layoutX="436.0" layoutY="328.0" mnemonicParsing="false" onAction="#toEngineStepPage" prefHeight="50.0" prefWidth="150.0" text="Next step" />
         <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#toMenu" prefHeight="50.0" prefWidth="150.0" text="Back" />
@@ -48,11 +40,30 @@
             <Font size="32.0" fx:id="x1" />
           </font>
         </Label>
+        <Pane fx:id="bodyDetailsPane" layoutX="120.0" layoutY="121.0" prefHeight="200.0" prefWidth="337.0" visible="false">
+          <children>
+            <Label layoutX="99.0" layoutY="6.0" text="Body details">
+              <font>
+                <Font name="System Bold" size="24.0" />
+              </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="38.0" text="Name">
+              <font>
+                <Font size="22.0" fx:id="x2" />
+              </font>
+            </Label>
+            <Label font="$x2" layoutX="14.0" layoutY="85.0" text="Type" />
+            <Label font="$x2" layoutX="14.0" layoutY="134.0" text="Price" />
+            <Label fx:id="bodyNameLabel" font="$x2" layoutX="147.0" layoutY="38.0" text="" />
+            <Label fx:id="bodyTypeLabel" font="$x2" layoutX="147.0" layoutY="85.0" text="" />
+            <Label fx:id="bodyPriceLabel" font="$x2" layoutX="147.0" layoutY="134.0" text="" />
+          </children>
+        </Pane>
       </children>
     </AnchorPane>
     <AnchorPane fx:id="engineStep" layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0" visible="false">
       <children>
-        <ComboBox fx:id ="enginesList" layoutX="154.0" layoutY="85.0" prefHeight="21.0" prefWidth="268.0">
+        <ComboBox fx:id="enginesList" layoutX="154.0" layoutY="85.0" prefHeight="21.0" prefWidth="268.0">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
