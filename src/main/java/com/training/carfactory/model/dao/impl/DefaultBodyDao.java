@@ -38,4 +38,24 @@ public class DefaultBodyDao implements BodyDao {
         }
         return bodies;
     }
+
+    @Override
+    public Body getByName(String name) {
+        try(Connection connection = connectionFactory.getConnection()) {
+            PreparedStatement prst = connection.prepareStatement("SELECT * FROM body WHERE name = ?");
+            prst.setString(1, name);
+            ResultSet rs = prst.executeQuery();
+            if (rs.next()){
+                Body body = new Body();
+                body.setId(rs.getLong(1));
+                body.setName(rs.getString(2));
+                body.setType(Body.Type.valueOf(rs.getString(3)));
+                body.setPrice(rs.getLong(4));
+                return body;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

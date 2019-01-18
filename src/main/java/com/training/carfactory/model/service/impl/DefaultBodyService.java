@@ -18,4 +18,9 @@ public class DefaultBodyService implements BodyService {
     public List<Body> getAll() {
         return bodyDao.getAll();
     }
+
+    @Override
+    public Body getByName(String name) {
+        return bodyDao.getByName(name);
+    }
 }
