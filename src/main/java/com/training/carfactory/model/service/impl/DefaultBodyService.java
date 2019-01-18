@@ -18,4 +18,7 @@ public class DefaultBodyService implements BodyService {
     public List<Body> getAll() {
         return bodyDao.getAll();
     }
+
+    @Override
+    public void addBody(Body body) {  }
 }

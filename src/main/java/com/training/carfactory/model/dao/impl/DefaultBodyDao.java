@@ -38,4 +38,20 @@ public class DefaultBodyDao implements BodyDao {
         }
         return bodies;
     }
+
+    @Override
+    public void addBody(Body body) {
+
+        try(Connection connection = connectionFactory.getConnection()){
+            PreparedStatement prst = connection.prepareStatement("INSERT INTO body(name, type, price)" +
+                    "VALUES(?, ?, ?)");
+
+            prst.setString(1, body.getName());
+            prst.setString(2, body.getType().toString());
+            prst.setLong(3, body.getPrice());
+            prst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -7,4 +7,6 @@ import java.util.List;
 public interface BodyDao {
 
     List<Body> getAll();
+
+    void addBody(Body body);
 }

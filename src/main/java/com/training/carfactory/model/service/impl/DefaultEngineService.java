@@ -18,4 +18,7 @@ public class DefaultEngineService implements EngineService {
     public List<Engine> getAll() {
         return engineDao.getAll();
     }
+
+    @Override
+    public void addEngine(Engine engine) { }
 }

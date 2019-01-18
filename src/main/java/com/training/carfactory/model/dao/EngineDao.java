@@ -7,4 +7,6 @@ import java.util.List;
 public interface EngineDao {
 
     List<Engine> getAll();
+
+    void addEngine(Engine engine);
 }
