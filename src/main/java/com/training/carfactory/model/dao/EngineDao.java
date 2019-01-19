@@ -7,6 +7,4 @@ import java.util.List;
 public interface EngineDao {
 
     List<Engine> getAll();
-
-    Engine getByName(String name);
 }

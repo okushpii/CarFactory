@@ -1,9 +1,9 @@
 package com.training.carfactory.controller.facade;
 
 import com.training.carfactory.model.entity.Body;
-import com.training.carfactory.model.entity.Engine;
-import com.training.carfactory.model.entity.Wheels;
-import com.training.carfactory.model.service.*;
+import com.training.carfactory.model.service.BodyService;
+import com.training.carfactory.model.service.ElementService;
+import com.training.carfactory.model.service.PageService;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -17,16 +17,11 @@ public class ApplicationFacade {
     private PageService pageService;
     private ElementService elementService;
     private BodyService bodyService;
-    private EngineService engineService;
-    private WheelsService wheelsService;
 
-    public ApplicationFacade(PageService pageService, ElementService elementService, BodyService bodyService, EngineService engineService,
-                             WheelsService wheelsService) {
+    public ApplicationFacade(PageService pageService, ElementService elementService, BodyService bodyService) {
         this.pageService = pageService;
         this.elementService = elementService;
         this.bodyService = bodyService;
-        this.engineService = engineService;
-        this.wheelsService = wheelsService;
     }
 
     public void init(Node initialPage, ComboBox<String> bodiesList, ComboBox<String> enginesList, ComboBox<String> wheelsList){
@@ -63,23 +58,5 @@ public class ApplicationFacade {
         bodyNameLabel.setText(body.getName());
         bodyTypeLabel.setText(body.getType().toString());
         bodyPriceLabel.setText(new BigDecimal(body.getPrice()).toString());
-    }
-
-    public void chooseEngine(Pane engineDetailsPane, Label engineNameLabel, Label engineVolumeLabel,
-                             Label enginePowerLabel, Label enginePriceLabel, ComboBox<String> enginesList){
-        engineDetailsPane.setVisible(true);
-        Engine engine = Optional.of(engineService.getByName(enginesList.getValue())).get();
-        engineNameLabel.setText(engine.getName());
-        engineVolumeLabel.setText(engine.getVolume().toString());
-        enginePowerLabel.setText(engine.getPower().toString());
-        enginePriceLabel.setText(new BigDecimal(engine.getPrice()).toString());
-    }
-    public void chooseWheels(Pane wheelsDetailsPane, Label wheelsNameLabel,
-                           Label wheelsSizeLabel, Label wheelsPriceLabel, ComboBox<String> wheelsList){
-        wheelsDetailsPane.setVisible(true);
-        Wheels wheels = Optional.of(wheelsService.getByName(wheelsList.getValue())).get();
-        wheelsNameLabel.setText(wheels.getName());
-        wheelsSizeLabel.setText(wheels.getSize().toString());
-        wheelsPriceLabel.setText(new BigDecimal(wheels.getPrice()).toString());
     }
 }

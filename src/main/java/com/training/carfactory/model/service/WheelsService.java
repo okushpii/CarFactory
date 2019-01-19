@@ -7,6 +7,4 @@ import java.util.List;
 public interface WheelsService {
 
     List<Wheels> getAll();
-
-    Wheels getByName(String name);
 }
