@@ -39,4 +39,25 @@ public class DefaultEngineDao implements EngineDao {
         }
         return engines;
     }
+
+    @Override
+    public Engine getByName(String name) {
+       try(Connection connection = connectionFactory.getConnection()) {
+           PreparedStatement prst = connection.prepareStatement("SELECT * FROM engine WHERE name = ?");
+           prst.setString(1, name);
+           ResultSet rs = prst.executeQuery();
+           if (rs.next()){
+               Engine engine = new Engine();
+               engine.setId(rs.getLong(1));
+               engine.setName(rs.getString(2));
+               engine.setVolume(rs.getLong(3));
+               engine.setPower(rs.getLong(4));
+               engine.setPrice(rs.getLong(5));
+               return engine;
+           }
+       } catch (SQLException e) {
+           e.printStackTrace();
+       }
+        return null;
+    }
 }

@@ -38,4 +38,24 @@ public class DefaultWheelsDao implements WheelsDao {
         }
         return wheelsList;
     }
+
+    @Override
+    public Wheels getByName(String name) {
+        try(Connection connection = connectionFactory.getConnection()) {
+            PreparedStatement prst = connection.prepareStatement("SELECT * FROM wheels WHERE name = ?");
+            prst.setString(1, name);
+            ResultSet rs = prst.executeQuery();
+            if (rs.next()){
+                Wheels wheels = new Wheels();
+                wheels.setId(rs.getLong(1));
+                wheels.setName(rs.getString(2));
+                wheels.setSize(rs.getLong(3));
+                wheels.setPrice(rs.getLong(4));
+                return wheels;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
