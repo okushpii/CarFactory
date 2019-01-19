@@ -7,4 +7,6 @@ import java.util.List;
 public interface WheelsDao {
 
     List<Wheels> getAll();
+
+    Wheels getByName(String name);
 }

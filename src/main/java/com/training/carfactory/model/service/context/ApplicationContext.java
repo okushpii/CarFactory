@@ -32,7 +32,7 @@ public class ApplicationContext {
         PageContext pageContext = new PageContext();
         PageService pageService = new DefaultPageService(pageContext);
         ElementService elementService = new DefaultElementService(bodyService, engineService, wheelsService);
-        applicationFacade = new ApplicationFacade(pageService, elementService, bodyService);
+        applicationFacade = new ApplicationFacade(pageService, elementService, bodyService, engineService, wheelsService);
 
     }
 
