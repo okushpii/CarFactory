@@ -22,10 +22,10 @@ public class DefaultBodyDao implements BodyDao {
     @Override
     public List<Body> getAll() {
         List<Body> bodies = new ArrayList<>();
-        try(Connection connection = connectionFactory.getConnection()){
+        try (Connection connection = connectionFactory.getConnection()) {
             PreparedStatement prst = connection.prepareStatement("SELECT * FROM body");
             ResultSet rs = prst.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 Body body = new Body();
                 body.setId(rs.getLong(1));
                 body.setName(rs.getString(2));
@@ -41,11 +41,11 @@ public class DefaultBodyDao implements BodyDao {
 
     @Override
     public Body getByName(String name) {
-        try(Connection connection = connectionFactory.getConnection()) {
+        try (Connection connection = connectionFactory.getConnection()) {
             PreparedStatement prst = connection.prepareStatement("SELECT * FROM body WHERE name = ?");
             prst.setString(1, name);
             ResultSet rs = prst.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 Body body = new Body();
                 body.setId(rs.getLong(1));
                 body.setName(rs.getString(2));
@@ -58,4 +58,19 @@ public class DefaultBodyDao implements BodyDao {
         }
         return null;
     }
+
+    public void addBody(Body body) {
+        try (Connection connection = connectionFactory.getConnection()) {
+            PreparedStatement prst = connection.prepareStatement("INSERT INTO body(name, type, price)" +
+                    "VALUES(?, ?, ?)");
+
+            prst.setString(1, body.getName());
+            prst.setString(2, body.getType().toString());
+            prst.setLong(3, body.getPrice());
+            prst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
+

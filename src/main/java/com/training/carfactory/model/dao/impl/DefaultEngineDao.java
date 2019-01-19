@@ -39,4 +39,22 @@ public class DefaultEngineDao implements EngineDao {
         }
         return engines;
     }
+
+    @Override
+    public void addEngine(Engine engine) {
+        try(Connection connection = connectionFactory.getConnection()){
+            PreparedStatement prst = connection.prepareStatement("INSERT INTO engine(id, name, volume, power, price)" +
+                    "VALUES(?, ?, ?, ?, ?)");
+
+            prst.setLong(1, engine.getId());
+            prst.setString(2, engine.getName());
+            prst.setLong(3, engine.getVolume());
+            prst.setLong(4, engine.getPower());
+            prst.setLong(5, engine.getPrice());
+            prst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

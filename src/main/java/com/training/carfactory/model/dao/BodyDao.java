@@ -9,4 +9,6 @@ public interface BodyDao {
     List<Body> getAll();
 
     Body getByName(String name);
+
+    void addBody(Body body);
 }
