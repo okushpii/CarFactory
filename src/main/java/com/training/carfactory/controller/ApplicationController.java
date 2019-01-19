@@ -33,24 +33,6 @@ public class ApplicationController {
     private Label bodyTypeLabel;
     @FXML
     private Label bodyPriceLabel;
-    @FXML
-    private Pane engineDetailsPane;
-    @FXML
-    private Label engineNameLabel;
-    @FXML
-    private Label engineVolumeLabel;
-    @FXML
-    private Label enginePowerLabel;
-    @FXML
-    private Label enginePriceLabel;
-    @FXML
-    private Pane wheelsDetailsPane;
-    @FXML
-    private Label wheelsNameLabel;
-    @FXML
-    private Label wheelsSizeLabel;
-    @FXML
-    private Label wheelsPriceLabel;
 
 
     private ApplicationFacade applicationFacade;
@@ -83,13 +65,6 @@ public class ApplicationController {
     public void chooseBody(){
         applicationFacade.chooseBody(bodyDetailsPane, bodyNameLabel,
                 bodyTypeLabel, bodyPriceLabel, bodiesList);
-    }
-    public void chooseEngine(){
-        applicationFacade.chooseEngine(engineDetailsPane, engineNameLabel,
-                engineVolumeLabel, enginePowerLabel, enginePriceLabel, enginesList);
-    }
-    public void chooseWheels(){
-        applicationFacade.chooseWheels(wheelsDetailsPane, wheelsNameLabel, wheelsSizeLabel, wheelsPriceLabel, wheelsList);
     }
 
     public void setApplicationFacade(ApplicationFacade applicationFacade) {

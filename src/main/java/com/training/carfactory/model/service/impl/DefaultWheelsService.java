@@ -17,9 +17,4 @@ public class DefaultWheelsService implements WheelsService {
     public List<Wheels> getAll() {
         return wheelsDao.getAll();
     }
-
-    @Override
-    public Wheels getByName(String name) {
-        return wheelsDao.getByName(name);
-    }
 }
