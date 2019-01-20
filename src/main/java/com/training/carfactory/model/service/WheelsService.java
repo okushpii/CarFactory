@@ -7,4 +7,6 @@ import java.util.List;
 public interface WheelsService {
 
     List<Wheels> getAll();
+
+    void addWheels(Wheels wheels);
 }

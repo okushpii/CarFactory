@@ -38,4 +38,20 @@ public class DefaultWheelsDao implements WheelsDao {
         }
         return wheelsList;
     }
+
+    @Override
+    public void addWheels(Wheels wheels) {
+        try(Connection connection = connectionFactory.getConnection()){
+            PreparedStatement prst = connection.prepareStatement("INSERT INTO wheels(name, size, price)" +
+                    "VALUES(?, ?, ?)");
+
+            prst.setString(1, wheels.getName());
+            prst.setLong(2, wheels.getSize());
+            prst.setLong(3, wheels.getPrice());
+
+            prst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

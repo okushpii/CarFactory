@@ -7,4 +7,6 @@ import java.util.List;
 public interface EngineService {
 
     List<Engine> getAll();
+
+    void addEngine(Engine engine);
 }

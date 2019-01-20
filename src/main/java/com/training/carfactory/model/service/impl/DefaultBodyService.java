@@ -23,4 +23,9 @@ public class DefaultBodyService implements BodyService {
     public Body getByName(String name) {
         return bodyDao.getByName(name);
     }
+
+    public void addBody(Body body) {
+        bodyDao.addBody(body);
+    }
+
 }

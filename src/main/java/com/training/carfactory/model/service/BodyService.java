@@ -9,4 +9,6 @@ public interface BodyService {
     List<Body> getAll();
 
     Body getByName(String name);
+
+    void addBody(Body body);
 }
