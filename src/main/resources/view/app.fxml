@@ -96,5 +96,6 @@
         </children>
       </Pane>
     </AnchorPane>
+    <Label fx:id="exceptionLabel" layoutX="230.0" layoutY="355.0" prefWidth="-1.0" text="" textFill="RED" />
   </children>
 </AnchorPane>

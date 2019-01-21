@@ -2,6 +2,7 @@ package com.training.carfactory.controller;
 
 import com.training.carfactory.controller.facade.ApplicationFacade;
 import com.training.carfactory.model.entity.Body;
+import com.training.carfactory.model.exception.ConnectionFailedException;
 import com.training.carfactory.model.service.context.ApplicationContext;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -51,13 +52,15 @@ public class ApplicationController {
     private Label wheelsSizeLabel;
     @FXML
     private Label wheelsPriceLabel;
+    @FXML
+    private Label exceptionLabel;
 
 
     private ApplicationFacade applicationFacade;
 
     public void initialize(){
         ApplicationContext.getInstance().initController(this);
-        applicationFacade.init(menu, bodiesList, enginesList, wheelsList);
+        initElements();
     }
 
     public void toBodyStepPage(){
@@ -90,6 +93,14 @@ public class ApplicationController {
     }
     public void chooseWheels(){
         applicationFacade.chooseWheels(wheelsDetailsPane, wheelsNameLabel, wheelsSizeLabel, wheelsPriceLabel, wheelsList);
+    }
+
+    private void initElements() {
+        try {
+            applicationFacade.init(menu, bodiesList, enginesList, wheelsList);
+        } catch (ConnectionFailedException ex){
+            exceptionLabel.setText("Some problems with connection");
+        }
     }
 
     public void setApplicationFacade(ApplicationFacade applicationFacade) {
