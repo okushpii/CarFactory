@@ -4,9 +4,7 @@ import com.training.carfactory.model.entity.Wheels;
 
 import java.util.List;
 
-public interface WheelsService {
+public interface WheelsService extends PartService<Wheels>{
 
     List<Wheels> getAll();
-
-    Wheels getByName(String name);
 }

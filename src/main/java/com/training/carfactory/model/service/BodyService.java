@@ -4,9 +4,7 @@ import com.training.carfactory.model.entity.Body;
 
 import java.util.List;
 
-public interface BodyService {
+public interface BodyService extends PartService<Body>{
 
     List<Body> getAll();
-
-    Body getByName(String name);
 }

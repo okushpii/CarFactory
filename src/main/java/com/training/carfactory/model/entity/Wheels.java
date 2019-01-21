@@ -1,6 +1,6 @@
 package com.training.carfactory.model.entity;
 
-public class Wheels {
+public class Wheels implements Part{
 
     private Long id;
     private String name;

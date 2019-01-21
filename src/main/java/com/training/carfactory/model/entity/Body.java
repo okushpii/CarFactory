@@ -1,6 +1,6 @@
 package com.training.carfactory.model.entity;
 
-public class Body {
+public class Body implements Part{
 
     private Long id;
     private String name;

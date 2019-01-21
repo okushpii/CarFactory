@@ -4,9 +4,7 @@ import com.training.carfactory.model.entity.Engine;
 
 import java.util.List;
 
-public interface EngineService {
+public interface EngineService extends PartService<Engine>{
 
     List<Engine> getAll();
-
-    Engine getByName(String name);
 }

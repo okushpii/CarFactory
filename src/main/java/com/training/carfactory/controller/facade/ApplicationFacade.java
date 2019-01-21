@@ -36,23 +36,7 @@ public class ApplicationFacade {
         elementService.initWheelsElements(wheelsList);
     }
 
-    public void toMenu(Node nextNode){
-        pageService.switchToPage(nextNode);
-    }
-
-    public void toBodyStage(Node nextNode){
-        pageService.switchToPage(nextNode);
-    }
-
-    public void toEngineStage(Node nextNode){
-        pageService.switchToPage(nextNode);
-    }
-
-    public void toWheelsStage(Node nextNode){
-        pageService.switchToPage(nextNode);
-    }
-
-    public void finishCar(Node nextNode){
+    public void toPage(Node nextNode){
         pageService.switchToPage(nextNode);
     }
 

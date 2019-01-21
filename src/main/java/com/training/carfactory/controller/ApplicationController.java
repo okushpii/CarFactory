@@ -2,8 +2,8 @@ package com.training.carfactory.controller;
 
 import com.training.carfactory.controller.facade.ApplicationFacade;
 import com.training.carfactory.controller.facade.CarFacade;
-import com.training.carfactory.model.entity.Body;
 import com.training.carfactory.model.exception.ConnectionFailedException;
+import com.training.carfactory.model.exception.PartIsMissingException;
 import com.training.carfactory.model.service.context.ApplicationContext;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -55,9 +55,6 @@ public class ApplicationController {
     private Label wheelsPriceLabel;
     @FXML
     private Label exceptionLabel;
-    @FXML
-    private Label bodyErrorLabel;
-
 
     private ApplicationFacade applicationFacade;
     private CarFacade carFacade;
@@ -68,27 +65,31 @@ public class ApplicationController {
     }
 
     public void toBodyStepPage(){
-        applicationFacade.toBodyStage(bodyStep);
+        switchToPage(bodyStep);
     }
 
     public void toEngineStepPage(){
         carFacade.buildBody(bodiesList);
-        applicationFacade.toEngineStage(engineStep);
+        switchToPage(engineStep);
     }
 
     public void toWheelsStepPage(){
         carFacade.buildEngine(enginesList);
-        applicationFacade.toWheelsStage(wheelsStep);
+        switchToPage(wheelsStep);
     }
 
     public void toMenu() {
-        applicationFacade.toMenu(menu);
+        switchToPage(menu);
     }
 
     public void finishCar(){
         carFacade.buildWheels(wheelsList);
-        carFacade.finishCar();
-        applicationFacade.finishCar(menu);
+        try {
+            carFacade.finishCar();
+            switchToPage(menu);
+        } catch (PartIsMissingException ex){
+            exceptionLabel.setText("Some parts are missing");
+        }
     }
 
     public void chooseBody(){
@@ -101,6 +102,11 @@ public class ApplicationController {
     }
     public void chooseWheels(){
         applicationFacade.chooseWheels(wheelsDetailsPane, wheelsNameLabel, wheelsSizeLabel, wheelsPriceLabel, wheelsList);
+    }
+
+    private void switchToPage(AnchorPane node){
+        exceptionLabel.setText("");
+        applicationFacade.toPage(node);
     }
 
     private void initElements() {
