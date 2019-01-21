@@ -2,6 +2,7 @@ package com.training.carfactory.model.dao.impl;
 
 import com.training.carfactory.model.dao.EngineDao;
 import com.training.carfactory.model.dao.util.ConnectionFactory;
+import com.training.carfactory.model.dao.util.Logger;
 import com.training.carfactory.model.entity.Engine;
 
 import java.sql.Connection;
@@ -35,8 +36,9 @@ public class DefaultEngineDao implements EngineDao {
                 engines.add(engine);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Logger.log(e.getMessage());
         }
+        Logger.log(engines.size() + " " + "engines were got");
         return engines;
     }
 
@@ -53,10 +55,11 @@ public class DefaultEngineDao implements EngineDao {
                engine.setVolume(rs.getLong(3));
                engine.setPower(rs.getLong(4));
                engine.setPrice(rs.getLong(5));
+               Logger.log( "Engine was got by name:" + " " + engine.getName());
                return engine;
            }
        } catch (SQLException e) {
-           e.printStackTrace();
+           Logger.log(e.getMessage());
        }
         return null;
     }
