@@ -1,6 +1,7 @@
 package com.training.carfactory.controller;
 
 import com.training.carfactory.controller.facade.ApplicationFacade;
+import com.training.carfactory.controller.facade.CarFacade;
 import com.training.carfactory.model.entity.Body;
 import com.training.carfactory.model.exception.ConnectionFailedException;
 import com.training.carfactory.model.service.context.ApplicationContext;
@@ -54,9 +55,12 @@ public class ApplicationController {
     private Label wheelsPriceLabel;
     @FXML
     private Label exceptionLabel;
+    @FXML
+    private Label bodyErrorLabel;
 
 
     private ApplicationFacade applicationFacade;
+    private CarFacade carFacade;
 
     public void initialize(){
         ApplicationContext.getInstance().initController(this);
@@ -68,10 +72,12 @@ public class ApplicationController {
     }
 
     public void toEngineStepPage(){
+        carFacade.buildBody(bodiesList);
         applicationFacade.toEngineStage(engineStep);
     }
 
     public void toWheelsStepPage(){
+        carFacade.buildEngine(enginesList);
         applicationFacade.toWheelsStage(wheelsStep);
     }
 
@@ -80,6 +86,8 @@ public class ApplicationController {
     }
 
     public void finishCar(){
+        carFacade.buildWheels(wheelsList);
+        carFacade.finishCar();
         applicationFacade.finishCar(menu);
     }
 
@@ -105,5 +113,9 @@ public class ApplicationController {
 
     public void setApplicationFacade(ApplicationFacade applicationFacade) {
         this.applicationFacade = applicationFacade;
+    }
+
+    public void setCarFacade(CarFacade carFacade) {
+        this.carFacade = carFacade;
     }
 }

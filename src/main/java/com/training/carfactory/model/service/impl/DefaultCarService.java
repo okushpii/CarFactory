@@ -6,10 +6,15 @@ import com.training.carfactory.model.service.CarService;
 
 public class DefaultCarService implements CarService {
 
-  private CarDao carDao;
+    private CarDao carDao;
 
-  public DefaultCarService(CarDao carDao){this.carDao = carDao;}
+    public DefaultCarService(CarDao carDao) {
+        this.carDao = carDao;
+    }
 
     @Override
-    public void addCar(Car car) { }
+    public void addCar(Car car) {
+        carDao.addCar(car);
+    }
+
 }
