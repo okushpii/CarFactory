@@ -2,6 +2,7 @@ package com.training.carfactory.model.dao.impl;
 
 import com.training.carfactory.model.dao.CarDao;
 import com.training.carfactory.model.dao.util.ConnectionFactory;
+import com.training.carfactory.model.dao.util.Logger;
 import com.training.carfactory.model.entity.Car;
 
 import java.sql.Connection;
@@ -34,7 +35,8 @@ public class DefaultCarDao implements CarDao {
             prst.setLong(6, car.getPrice());
             prst.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            Logger.log(e.getMessage());
         }
+        Logger.log( "Car was added: engine");
     }
 }

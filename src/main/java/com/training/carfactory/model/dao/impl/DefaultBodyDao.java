@@ -2,6 +2,7 @@ package com.training.carfactory.model.dao.impl;
 
 import com.training.carfactory.model.dao.BodyDao;
 import com.training.carfactory.model.dao.util.ConnectionFactory;
+import com.training.carfactory.model.dao.util.Logger;
 import com.training.carfactory.model.entity.Body;
 
 import java.sql.Connection;
@@ -34,9 +35,11 @@ public class DefaultBodyDao implements BodyDao {
                 bodies.add(body);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Logger.log(e.getMessage());
         }
+        Logger.log(bodies.size() + " " + "bodies were got");
         return bodies;
+
     }
 
     @Override
@@ -51,10 +54,11 @@ public class DefaultBodyDao implements BodyDao {
                 body.setName(rs.getString(2));
                 body.setType(Body.Type.valueOf(rs.getString(3)));
                 body.setPrice(rs.getLong(4));
+                Logger.log("Body was got by name:" + " " + body.getName());
                 return body;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Logger.log(e.getMessage());
         }
         return null;
     }

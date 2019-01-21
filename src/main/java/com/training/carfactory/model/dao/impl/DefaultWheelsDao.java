@@ -2,6 +2,7 @@ package com.training.carfactory.model.dao.impl;
 
 import com.training.carfactory.model.dao.WheelsDao;
 import com.training.carfactory.model.dao.util.ConnectionFactory;
+import com.training.carfactory.model.dao.util.Logger;
 import com.training.carfactory.model.entity.Wheels;
 
 import java.sql.Connection;
@@ -34,8 +35,9 @@ public class DefaultWheelsDao implements WheelsDao {
                 wheelsList.add(wheels);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Logger.log(e.getMessage());
         }
+        Logger.log(wheelsList.size() + " " + "wheels were got");
         return wheelsList;
     }
 
@@ -51,10 +53,11 @@ public class DefaultWheelsDao implements WheelsDao {
                 wheels.setName(rs.getString(2));
                 wheels.setSize(rs.getLong(3));
                 wheels.setPrice(rs.getLong(4));
+                Logger.log( "Wheels were got by name:" + " " + wheels.getName());
                 return wheels;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Logger.log(e.getMessage());
         }
         return null;
     }
