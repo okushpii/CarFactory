@@ -6,6 +6,7 @@ import com.training.carfactory.model.entity.Car;
 import com.training.carfactory.model.entity.Engine;
 import com.training.carfactory.model.entity.Wheels;
 import com.training.carfactory.model.service.*;
+import com.training.carfactory.model.service.impl.util.ValueFormatterService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -21,11 +22,15 @@ public class DefaultElementService implements ElementService {
     private WheelsService wheelsService;
     private CarService carService;
 
-    public DefaultElementService(BodyService bodyService, EngineService engineService, WheelsService wheelsService, CarService carService) {
+    private ValueFormatterService valueFormatterService;
+
+    public DefaultElementService(BodyService bodyService, EngineService engineService,
+                                 WheelsService wheelsService, CarService carService, ValueFormatterService valueFormatterService) {
         this.bodyService = bodyService;
         this.engineService = engineService;
         this.wheelsService = wheelsService;
         this.carService = carService;
+        this.valueFormatterService = valueFormatterService;
     }
 
     @Override
@@ -49,9 +54,9 @@ public class DefaultElementService implements ElementService {
             String> engineColumn, TableColumn<Car, String> wheelsColumn) {
 
         carIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        bodyColumn.setCellValueFactory(car -> new SimpleStringProperty(car.getValue().getBody().getName()));
-        engineColumn.setCellValueFactory(car -> new SimpleStringProperty(car.getValue().getEngine().getName()));
-        wheelsColumn.setCellValueFactory(car -> new SimpleStringProperty(car.getValue().getWheels().getName()));
+        bodyColumn.setCellValueFactory(car -> new SimpleStringProperty(valueFormatterService.formatBody(car.getValue().getBody())));
+        engineColumn.setCellValueFactory(car -> new SimpleStringProperty(valueFormatterService.formatEngine(car.getValue().getEngine())));
+        wheelsColumn.setCellValueFactory(car -> new SimpleStringProperty(valueFormatterService.formatWheels(car.getValue().getWheels())));
 
         carTableView.setItems(new ObservableListWrapper<>(carService.getAll()));
     }

@@ -14,6 +14,8 @@ import com.training.carfactory.model.dao.impl.DefaultWheelsDao;
 import com.training.carfactory.model.dao.util.ConnectionFactory;
 import com.training.carfactory.model.service.*;
 import com.training.carfactory.model.service.impl.*;
+import com.training.carfactory.model.service.impl.util.PriceCalculationService;
+import com.training.carfactory.model.service.impl.util.ValueFormatterService;
 
 public class ApplicationContext {
 
@@ -39,7 +41,9 @@ public class ApplicationContext {
         PageContext pageContext = new PageContext();
         PageService pageService = new DefaultPageService(pageContext);
         CarService carService = new DefaultCarService(carDao);
-        ElementService elementService = new DefaultElementService(bodyService, engineService, wheelsService, carService);
+        ValueFormatterService valueFormatterService = new ValueFormatterService();
+        ElementService elementService = new DefaultElementService(bodyService, engineService, wheelsService, carService, valueFormatterService);
+
         PriceCalculationService priceCalculationService = new PriceCalculationService();
 
         applicationFacade = new ApplicationFacade(pageService, elementService, bodyService, engineService, wheelsService);

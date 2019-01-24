@@ -4,7 +4,7 @@ import com.training.carfactory.model.entity.Car;
 import com.training.carfactory.model.entity.Part;
 import com.training.carfactory.model.exception.PartIsMissingException;
 import com.training.carfactory.model.service.*;
-import com.training.carfactory.model.service.impl.PriceCalculationService;
+import com.training.carfactory.model.service.impl.util.PriceCalculationService;
 import javafx.scene.control.ComboBox;
 
 

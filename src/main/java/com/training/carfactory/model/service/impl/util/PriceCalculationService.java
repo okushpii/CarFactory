@@ -1,4 +1,4 @@
-package com.training.carfactory.model.service.impl;
+package com.training.carfactory.model.service.impl.util;
 
 public class PriceCalculationService {
 
