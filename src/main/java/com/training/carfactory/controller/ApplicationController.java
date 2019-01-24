@@ -100,6 +100,7 @@ public class ApplicationController {
         try {
             carFacade.finishCar();
             switchToPage(menu);
+            applicationFacade.initCarTable(carTableView, carIdColumn, bodyColumn, engineColumn, wheelsColumn);
         } catch (PartIsMissingException ex){
             exceptionLabel.setText("Some parts are missing");
         }
