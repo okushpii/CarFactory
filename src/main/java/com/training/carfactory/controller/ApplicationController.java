@@ -2,12 +2,15 @@ package com.training.carfactory.controller;
 
 import com.training.carfactory.controller.facade.ApplicationFacade;
 import com.training.carfactory.controller.facade.CarFacade;
+import com.training.carfactory.model.entity.Car;
 import com.training.carfactory.model.exception.ConnectionFailedException;
 import com.training.carfactory.model.exception.PartIsMissingException;
 import com.training.carfactory.model.service.context.ApplicationContext;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -27,6 +30,16 @@ public class ApplicationController {
     private ComboBox<String> enginesList;
     @FXML
     private ComboBox<String> wheelsList;
+    @FXML
+    private TableView<Car> carTableView;
+    @FXML
+    private TableColumn<Car, Long> carIdColumn;
+    @FXML
+    private TableColumn<Car, String> bodyColumn;
+    @FXML
+    private TableColumn<Car, String> engineColumn;
+    @FXML
+    private TableColumn<Car, String> wheelsColumn;
     @FXML
     private Pane bodyDetailsPane;
     @FXML
@@ -111,7 +124,8 @@ public class ApplicationController {
 
     private void initElements() {
         try {
-            applicationFacade.init(menu, bodiesList, enginesList, wheelsList);
+            applicationFacade.initPartComboBoxes(menu, bodiesList, enginesList, wheelsList, carTableView);
+            applicationFacade.initCarTable(carTableView, carIdColumn, bodyColumn, engineColumn, wheelsColumn);
         } catch (ConnectionFailedException ex){
             exceptionLabel.setText("Some problems with connection");
         }

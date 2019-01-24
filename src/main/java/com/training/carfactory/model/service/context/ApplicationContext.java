@@ -39,7 +39,7 @@ public class ApplicationContext {
         PageContext pageContext = new PageContext();
         PageService pageService = new DefaultPageService(pageContext);
         CarService carService = new DefaultCarService(carDao);
-        ElementService elementService = new DefaultElementService(bodyService, engineService, wheelsService);
+        ElementService elementService = new DefaultElementService(bodyService, engineService, wheelsService, carService);
         PriceCalculationService priceCalculationService = new PriceCalculationService();
 
         applicationFacade = new ApplicationFacade(pageService, elementService, bodyService, engineService, wheelsService);

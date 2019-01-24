@@ -1,12 +1,15 @@
 package com.training.carfactory.controller.facade;
 
 import com.training.carfactory.model.entity.Body;
+import com.training.carfactory.model.entity.Car;
 import com.training.carfactory.model.entity.Engine;
 import com.training.carfactory.model.entity.Wheels;
 import com.training.carfactory.model.service.*;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 
 import java.math.BigDecimal;
@@ -28,12 +31,18 @@ public class ApplicationFacade {
         this.engineService = engineService;
         this.wheelsService = wheelsService;
     }
-
-    public void init(Node initialPage, ComboBox<String> bodiesList, ComboBox<String> enginesList, ComboBox<String> wheelsList){
+    public void initPartComboBoxes(Node initialPage, ComboBox<String> bodiesList, ComboBox<String> enginesList, ComboBox<String> wheelsList, TableView<Car> carTableView){
         pageService.setCurrentPage(initialPage);
         elementService.initBodyElements(bodiesList);
         elementService.initEngineElements(enginesList);
         elementService.initWheelsElements(wheelsList);
+    }
+
+    public void initCarTable(TableView<Car> carTableView, TableColumn<Car, Long> carIdColumn,
+                             TableColumn<Car, String> bodyColumn, TableColumn<Car,
+            String> engineColumn, TableColumn<Car, String> wheelsColumn){
+
+        elementService.initCarTableElements(carTableView, carIdColumn, bodyColumn, engineColumn, wheelsColumn);
     }
 
     public void toPage(Node nextNode){
