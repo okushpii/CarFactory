@@ -10,11 +10,12 @@
   <children>
     <AnchorPane fx:id="menu" prefHeight="400.0" prefWidth="599.9999000000025" visible="true">
       <children>
-        <TableView layoutX="14.0" layoutY="64.0" prefHeight="263.0" prefWidth="572.0">
+        <TableView fx:id="carTableView" layoutX="14.0" layoutY="64.0" prefHeight="263.0" prefWidth="572.0">
           <columns>
-            <TableColumn prefWidth="75.0" text="Id" />
-            <TableColumn prefWidth="108.0" text="Manufacturer" />
-            <TableColumn prefWidth="108.0" text="Model" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="90.0" text="Id" fx:id="carIdColumn" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="160.0" text="Body" fx:id="bodyColumn" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="160.0" text="Engine" fx:id="engineColumn" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="160.0" text="Wheels" fx:id="wheelsColumn" />
           </columns>
         </TableView>
         <Button layoutX="436.0" layoutY="342.0" mnemonicParsing="false" onAction="#toBodyStepPage" prefHeight="50.0" prefWidth="150.0" text="Create car" />
