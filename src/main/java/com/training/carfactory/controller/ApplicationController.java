@@ -7,10 +7,7 @@ import com.training.carfactory.model.exception.ConnectionFailedException;
 import com.training.carfactory.model.exception.PartIsMissingException;
 import com.training.carfactory.model.service.context.ApplicationContext;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -25,7 +22,7 @@ public class ApplicationController {
     @FXML
     private AnchorPane wheelsStep;
     @FXML
-    private ComboBox<String> bodiesList;
+    private ListView<String> bodiesListView;
     @FXML
     private ComboBox<String> enginesList;
     @FXML
@@ -48,6 +45,12 @@ public class ApplicationController {
     private Label bodyTypeLabel;
     @FXML
     private Label bodyPriceLabel;
+    @FXML
+    private Button installBodyButton;
+    @FXML
+    private Button removeBodyButton;
+    @FXML
+    private ProgressBar bodyProgress;
     @FXML
     private Pane engineDetailsPane;
     @FXML
@@ -81,8 +84,19 @@ public class ApplicationController {
         switchToPage(bodyStep);
     }
 
+    public void installBody(){
+        try {
+            carFacade.buildBody(bodiesListView, bodyProgress, installBodyButton, removeBodyButton);
+        } catch (PartIsMissingException ex){
+            exceptionLabel.setText(ex.getMessage());
+        }
+    }
+
+    public void removeBody(){
+        carFacade.removeBody(bodyProgress, installBodyButton, removeBodyButton);
+    }
+
     public void toEngineStepPage(){
-        carFacade.buildBody(bodiesList);
         switchToPage(engineStep);
     }
 
@@ -102,13 +116,14 @@ public class ApplicationController {
             switchToPage(menu);
             applicationFacade.initCarTable(carTableView, carIdColumn, bodyColumn, engineColumn, wheelsColumn);
         } catch (PartIsMissingException ex){
-            exceptionLabel.setText("Some parts are missing");
+            exceptionLabel.setText(ex.getMessage());
         }
     }
 
-    public void chooseBody(){
+    public void selectBody(){
+        exceptionLabel.setText("");
         applicationFacade.chooseBody(bodyDetailsPane, bodyNameLabel,
-                bodyTypeLabel, bodyPriceLabel, bodiesList);
+                bodyTypeLabel, bodyPriceLabel, bodiesListView);
     }
     public void chooseEngine(){
         applicationFacade.chooseEngine(engineDetailsPane, engineNameLabel,
@@ -125,7 +140,7 @@ public class ApplicationController {
 
     private void initElements() {
         try {
-            applicationFacade.initPartComboBoxes(menu, bodiesList, enginesList, wheelsList, carTableView);
+            applicationFacade.initPartComboBoxes(menu, bodiesListView, enginesList, wheelsList, carTableView);
             applicationFacade.initCarTable(carTableView, carIdColumn, bodyColumn, engineColumn, wheelsColumn);
         } catch (ConnectionFailedException ex){
             exceptionLabel.setText("Some problems with connection");

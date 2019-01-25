@@ -2,12 +2,13 @@ package com.training.carfactory.model.service;
 
 import com.training.carfactory.model.entity.Car;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 public interface ElementService {
 
-    void initBodyElements(ComboBox<String> bodiesList);
+    void initBodyElements(ListView<String> bodiesListView);
 
     void initEngineElements(ComboBox<String> enginesList);
 

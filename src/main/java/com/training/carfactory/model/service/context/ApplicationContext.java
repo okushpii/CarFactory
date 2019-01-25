@@ -15,6 +15,7 @@ import com.training.carfactory.model.dao.util.ConnectionFactory;
 import com.training.carfactory.model.service.*;
 import com.training.carfactory.model.service.impl.*;
 import com.training.carfactory.model.service.impl.util.PriceCalculationService;
+import com.training.carfactory.model.service.impl.util.ProgressBarSimulator;
 import com.training.carfactory.model.service.impl.util.ValueFormatterService;
 
 public class ApplicationContext {
@@ -42,12 +43,13 @@ public class ApplicationContext {
         PageService pageService = new DefaultPageService(pageContext);
         CarService carService = new DefaultCarService(carDao);
         ValueFormatterService valueFormatterService = new ValueFormatterService();
+        ProgressBarSimulator progressBarSimulator = new ProgressBarSimulator();
         ElementService elementService = new DefaultElementService(bodyService, engineService, wheelsService, carService, valueFormatterService);
 
         PriceCalculationService priceCalculationService = new PriceCalculationService();
 
         applicationFacade = new ApplicationFacade(pageService, elementService, bodyService, engineService, wheelsService);
-        carFacade = new CarFacade(bodyService, engineService, wheelsService, carService, priceCalculationService);
+        carFacade = new CarFacade(bodyService, engineService, wheelsService, carService, priceCalculationService, progressBarSimulator);
     }
 
     public static ApplicationContext getInstance() {

@@ -29,7 +29,6 @@
     </AnchorPane>
     <AnchorPane fx:id="bodyStep" prefHeight="600.0" prefWidth="800.0" visible="false">
       <children>
-        <ComboBox fx:id="bodiesList" layoutX="266.0" layoutY="85.0" onAction="#chooseBody" prefHeight="21.0" prefWidth="268.0" />
         <Button layoutX="636.0" layoutY="536.0" mnemonicParsing="false" onAction="#toEngineStepPage" prefHeight="50.0" prefWidth="150.0" text="Next step" />
         <Button layoutX="14.0" layoutY="536.0" mnemonicParsing="false" onAction="#toMenu" prefHeight="50.0" prefWidth="150.0" text="Back" />
         <Label layoutX="294.0" layoutY="22.0" text="Choose a body">
@@ -37,23 +36,31 @@
             <Font size="32.0" fx:id="x1" />
           </font>
         </Label>
-        <Pane fx:id="bodyDetailsPane" layoutX="232.0" layoutY="170.0" prefHeight="200.0" prefWidth="337.0" visible="false">
+        <Pane fx:id="bodyDetailsPane" layoutX="379.0" layoutY="90.0" prefHeight="250.0" prefWidth="340.0" visible="false">
           <Label layoutX="99.0" layoutY="6.0" text="Body details">
             <font>
               <Font name="System Bold" size="24.0" fx:id="x3" />
             </font>
           </Label>
-          <Label layoutX="14.0" layoutY="40.0" text="Name">
-            <font>
-              <Font size="22.0" fx:id="x2" />
-            </font>
-          </Label>
-          <Label font="$x2" layoutX="14.0" layoutY="90.0" text="Type" />
-          <Label font="$x2" layoutX="14.0" layoutY="140.0" text="Price" />
-          <Label fx:id="bodyNameLabel" font="$x2" layoutX="147.0" layoutY="40.0" />
-          <Label fx:id="bodyTypeLabel" font="$x2" layoutX="147.0" layoutY="90.0" />
-          <Label fx:id="bodyPriceLabel" font="$x2" layoutX="147.0" layoutY="140.0" />
+          <Pane id="bodyDetailsText" layoutX="-1.0" layoutY="64.0" prefHeight="150.0" prefWidth="340.0">
+            <children>
+              <Label layoutX="50.0" layoutY="10.0" text="Name">
+                <font>
+                  <Font size="22.0" fx:id="x2" />
+                </font>
+              </Label>
+              <Label font="$x2" layoutX="50.0" layoutY="60.0" text="Type" />
+              <Label font="$x2" layoutX="50.0" layoutY="110.0" text="Price" />
+              <Label fx:id="bodyNameLabel" font="$x2" layoutX="200.0" layoutY="10.0" />
+              <Label fx:id="bodyTypeLabel" font="$x2" layoutX="200.0" layoutY="60.0" />
+              <Label fx:id="bodyPriceLabel" font="$x2" layoutX="200.0" layoutY="110.0" />
+            </children>
+          </Pane>
         </Pane>
+        <ListView fx:id="bodiesListView" layoutX="44.0" layoutY="100.0" onMouseClicked="#selectBody" prefHeight="400.0" prefWidth="270.0" />
+        <ProgressBar fx:id="bodyProgress" layoutX="378.0" layoutY="470.0" prefHeight="30.0" prefWidth="340.0" progress="0.0" />
+        <Button fx:id="installBodyButton" cancelButton="false" defaultButton="false" layoutX="379.0" layoutY="440.0" mnemonicParsing="false" onAction="#installBody" prefHeight="30.0" prefWidth="80.0" text="Install" textOverrun="ELLIPSIS" />
+        <Button fx:id="removeBodyButton" cancelButton="false" defaultButton="false" disable="true" layoutX="459.0" layoutY="440.0" mnemonicParsing="false" onAction="#removeBody" prefHeight="30.0" prefWidth="80.0" text="Remove" textOverrun="ELLIPSIS" />
       </children>
     </AnchorPane>
     <AnchorPane fx:id="engineStep" prefHeight="600.0" prefWidth="800.0" visible="false">

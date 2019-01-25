@@ -6,10 +6,7 @@ import com.training.carfactory.model.entity.Engine;
 import com.training.carfactory.model.entity.Wheels;
 import com.training.carfactory.model.service.*;
 import javafx.scene.Node;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 
 import java.math.BigDecimal;
@@ -31,9 +28,9 @@ public class ApplicationFacade {
         this.engineService = engineService;
         this.wheelsService = wheelsService;
     }
-    public void initPartComboBoxes(Node initialPage, ComboBox<String> bodiesList, ComboBox<String> enginesList, ComboBox<String> wheelsList, TableView<Car> carTableView){
+    public void initPartComboBoxes(Node initialPage, ListView<String> bodiesListView, ComboBox<String> enginesList, ComboBox<String> wheelsList, TableView<Car> carTableView){
         pageService.setCurrentPage(initialPage);
-        elementService.initBodyElements(bodiesList);
+        elementService.initBodyElements(bodiesListView);
         elementService.initEngineElements(enginesList);
         elementService.initWheelsElements(wheelsList);
     }
@@ -50,9 +47,9 @@ public class ApplicationFacade {
     }
 
     public void chooseBody(Pane bodyDetailsPane, Label bodyNameLabel,
-                           Label bodyTypeLabel, Label bodyPriceLabel, ComboBox<String> bodiesList){
+                           Label bodyTypeLabel, Label bodyPriceLabel, ListView<String> bodiesListView){
         bodyDetailsPane.setVisible(true);
-        Body body = Optional.of(bodyService.getByName(bodiesList.getValue())).get();
+        Body body = Optional.of(bodyService.getByName(bodiesListView.getSelectionModel().getSelectedItem())).get();
         bodyNameLabel.setText(body.getName());
         bodyTypeLabel.setText(body.getType().toString());
         bodyPriceLabel.setText(new BigDecimal(body.getPrice()).toString());
