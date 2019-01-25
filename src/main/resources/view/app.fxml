@@ -1,100 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.training.carfactory.controller.ApplicationController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.training.carfactory.controller.ApplicationController">
   <children>
-    <AnchorPane fx:id="menu" prefHeight="400.0" prefWidth="599.9999000000025">
+    <AnchorPane fx:id="menu" prefHeight="600.0" prefWidth="800.0" visible="true">
       <children>
-        <TableView fx:id="carTableView" layoutX="14.0" layoutY="64.0" prefHeight="263.0" prefWidth="572.0">
+        <TableView fx:id="carTableView" layoutX="50.0" layoutY="88.0" prefHeight="425.0" prefWidth="700.0">
           <columns>
-            <TableColumn prefWidth="90.0" text="Id" fx:id="carIdColumn"/>
-            <TableColumn prefWidth="160.0" text="Body" fx:id="bodyColumn" />
-            <TableColumn prefWidth="160.0" text="Engine" fx:id="engineColumn" />
-            <TableColumn prefWidth="160.0" text="Wheels" fx:id="wheelsColumn" />
+            <TableColumn prefWidth="98.0" text="Id" fx:id="carIdColumn" />
+            <TableColumn prefWidth="200.0" text="Body" fx:id="bodyColumn" />
+            <TableColumn prefWidth="200.0" text="Engine" fx:id="engineColumn" />
+            <TableColumn prefWidth="200.0" text="Wheels" fx:id="wheelsColumn" />
           </columns>
         </TableView>
-        <Button layoutX="436.0" layoutY="342.0" mnemonicParsing="false" onAction="#toBodyStepPage" prefHeight="50.0" prefWidth="150.0" text="Create car" />
-        <Button layoutX="14.0" layoutY="342.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Exit" />
-        <Label layoutX="199.0" layoutY="8.0" text="Car factory">
+        <Button layoutX="636.0" layoutY="536.0" mnemonicParsing="false" onAction="#toBodyStepPage" prefHeight="50.0" prefWidth="150.0" text="Create car" />
+        <Button layoutX="14.0" layoutY="536.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Exit" />
+        <Label layoutX="299.0" layoutY="14.0" text="Car factory">
           <font>
             <Font size="42.0" />
           </font>
         </Label>
       </children>
     </AnchorPane>
-    <AnchorPane fx:id="bodyStep" prefHeight="400.0" prefWidth="600.0" visible="false">
+    <AnchorPane fx:id="bodyStep" prefHeight="600.0" prefWidth="800.0" visible="false">
       <children>
-        <ComboBox fx:id="bodiesList" layoutX="154.0" layoutY="85.0" onAction="#chooseBody" prefHeight="21.0" prefWidth="268.0" />
-        <ImageView fitHeight="195.75" fitWidth="261.0" layoutX="154.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true"/>
-        <Button layoutX="436.0" layoutY="328.0" mnemonicParsing="false" onAction="#toEngineStepPage" prefHeight="50.0" prefWidth="150.0" text="Next step" />
-        <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#toMenu" prefHeight="50.0" prefWidth="150.0" text="Back" />
-        <Label layoutX="195.0" layoutY="22.0" text="Choose a body">
+        <ComboBox fx:id="bodiesList" layoutX="266.0" layoutY="85.0" onAction="#chooseBody" prefHeight="21.0" prefWidth="268.0" />
+        <Button layoutX="636.0" layoutY="536.0" mnemonicParsing="false" onAction="#toEngineStepPage" prefHeight="50.0" prefWidth="150.0" text="Next step" />
+        <Button layoutX="14.0" layoutY="536.0" mnemonicParsing="false" onAction="#toMenu" prefHeight="50.0" prefWidth="150.0" text="Back" />
+        <Label layoutX="294.0" layoutY="22.0" text="Choose a body">
           <font>
             <Font size="32.0" fx:id="x1" />
           </font>
         </Label>
-        <Pane fx:id="bodyDetailsPane" layoutX="120.0" layoutY="121.0" prefHeight="200.0" prefWidth="337.0"
-              visible="false">
+        <Pane fx:id="bodyDetailsPane" layoutX="232.0" layoutY="170.0" prefHeight="200.0" prefWidth="337.0" visible="false">
           <Label layoutX="99.0" layoutY="6.0" text="Body details">
             <font>
-              <Font name="System Bold" size="24.0" fx:id="x3"/>
+              <Font name="System Bold" size="24.0" fx:id="x3" />
             </font>
           </Label>
-          <Label layoutX="14.0" layoutY="38.0" text="Name">
+          <Label layoutX="14.0" layoutY="40.0" text="Name">
             <font>
-              <Font size="22.0" fx:id="x2"/>
+              <Font size="22.0" fx:id="x2" />
             </font>
           </Label>
-          <Label font="$x2" layoutX="14.0" layoutY="85.0" text="Type"/>
-          <Label font="$x2" layoutX="14.0" layoutY="134.0" text="Price"/>
-          <Label fx:id="bodyNameLabel" font="$x2" layoutX="147.0" layoutY="38.0"/>
-          <Label fx:id="bodyTypeLabel" font="$x2" layoutX="147.0" layoutY="85.0"/>
-          <Label fx:id="bodyPriceLabel" font="$x2" layoutX="147.0" layoutY="134.0"/>
+          <Label font="$x2" layoutX="14.0" layoutY="90.0" text="Type" />
+          <Label font="$x2" layoutX="14.0" layoutY="140.0" text="Price" />
+          <Label fx:id="bodyNameLabel" font="$x2" layoutX="147.0" layoutY="40.0" />
+          <Label fx:id="bodyTypeLabel" font="$x2" layoutX="147.0" layoutY="90.0" />
+          <Label fx:id="bodyPriceLabel" font="$x2" layoutX="147.0" layoutY="140.0" />
         </Pane>
       </children>
     </AnchorPane>
-    <AnchorPane fx:id="engineStep" prefHeight="400.0" prefWidth="600.0" visible="false">
-      <ComboBox fx:id="enginesList" layoutX="154.0" layoutY="85.0" onAction="#chooseEngine" prefHeight="21.0" prefWidth="268.0" />
-      <ImageView fitHeight="195.75" fitWidth="261.0" layoutX="154.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true"/>
-      <Button layoutX="436.0" layoutY="328.0" mnemonicParsing="false" onAction="#toWheelsStepPage" prefHeight="50.0" prefWidth="150.0" text="Next step" />
-      <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#toBodyStepPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
-      <Label font="$x1" layoutX="158.0" layoutY="22.0" text="Choose an engine" />
-      <Pane fx:id="engineDetailsPane" layoutX="132.0" layoutY="100.0" prefHeight="200.0" prefWidth="337.0" visible="false">
+    <AnchorPane fx:id="engineStep" prefHeight="600.0" prefWidth="800.0" visible="false">
+      <ComboBox fx:id="enginesList" layoutX="266.0" layoutY="85.0" onAction="#chooseEngine" prefHeight="21.0" prefWidth="268.0" />
+      <ImageView fitHeight="195.75" fitWidth="261.0" layoutX="154.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="636.0" layoutY="536.0" mnemonicParsing="false" onAction="#toWheelsStepPage" prefHeight="50.0" prefWidth="150.0" text="Next step" />
+      <Button layoutX="14.0" layoutY="536.0" mnemonicParsing="false" onAction="#toBodyStepPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
+      <Label font="$x1" layoutX="273.0" layoutY="22.0" text="Choose an engine" />
+      <Pane fx:id="engineDetailsPane" layoutX="232.0" layoutY="170.0" prefHeight="239.0" prefWidth="337.0" visible="false">
         <children>
           <Label font="$x3" layoutX="99.0" layoutY="6.0" text="Engine details" />
-          <Label font="$x2" layoutX="8.0" layoutY="32.0" text="Name" />
-          <Label font="$x2" layoutX="4.0" layoutY="73.0" minHeight="21.0" prefHeight="27.0" prefWidth="75.0" text="Volume" />
-          <Label font="$x2" layoutX="6.0" layoutY="113.0" text="Power" />
-          <Label font="$x2" layoutX="13.0" layoutY="157.0" text="Price" />
-          <Label fx:id="engineNameLabel" font="$x2" layoutX="147.0" layoutY="38.0" minHeight="17.26171875" prefHeight="25.26171875" />
-          <Label fx:id="engineVolumeLabel" font="$x2" layoutX="147.0" layoutY="74.0" minHeight="17.26171875" prefHeight="28.26171875"/>
-          <Label fx:id="enginePowerLabel" font="$x2" layoutX="147.0" layoutY="120.0" minHeight="25.26171875" prefHeight="25.26171875" prefWidth="0.0" />
-          <Label fx:id="enginePriceLabel" font="$x2" layoutX="147.0" layoutY="156.0" minHeight="14.26171875" prefHeight="26.26171875" />
+          <Label font="$x2" layoutX="14.0" layoutY="42.0" text="Name" />
+          <Label font="$x2" layoutX="14.0" layoutY="92.0" minHeight="21.0" prefHeight="27.0" prefWidth="75.0" text="Volume" />
+          <Label font="$x2" layoutX="14.0" layoutY="142.0" text="Power" />
+          <Label font="$x2" layoutX="13.0" layoutY="192.0" text="Price" />
+          <Label fx:id="engineNameLabel" font="$x2" layoutX="147.0" layoutY="42.0" minHeight="17.26171875" prefHeight="25.26171875" />
+          <Label fx:id="engineVolumeLabel" font="$x2" layoutX="147.0" layoutY="92.0" minHeight="17.26171875" prefHeight="28.26171875" />
+          <Label fx:id="enginePowerLabel" font="$x2" layoutX="147.0" layoutY="142.0" minHeight="25.26171875" prefHeight="25.26171875" prefWidth="0.0" />
+          <Label fx:id="enginePriceLabel" font="$x2" layoutX="147.0" layoutY="192.0" minHeight="14.26171875" prefHeight="26.26171875" />
         </children>
       </Pane>
     </AnchorPane>
-    <AnchorPane fx:id="wheelsStep" prefHeight="400.0" prefWidth="600.0" visible="false">
-      <ComboBox fx:id="wheelsList" layoutX="154.0" layoutY="85.0" onAction="#chooseWheels" prefHeight="21.0" prefWidth="268.0" />
-      <ImageView fitHeight="195.75" fitWidth="261.0" layoutX="154.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" />
-      <Button id="finish" layoutX="436.0" layoutY="328.0" mnemonicParsing="false" onAction="#finishCar" prefHeight="50.0" prefWidth="150.0" text="Finish" />
-      <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#toEngineStepPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
-      <Label font="$x1" layoutX="170.0" layoutY="22.0" text="Choose a wheels" />
-      <Pane fx:id="wheelsDetailsPane" disable="false" layoutX="120.0" layoutY="106.0" prefHeight="200.0" prefWidth="337.0" visible="false">
+    <AnchorPane fx:id="wheelsStep" prefHeight="600.0" prefWidth="800.0" visible="false">
+      <ComboBox fx:id="wheelsList" layoutX="281.0" layoutY="85.0" onAction="#chooseWheels" prefHeight="21.0" prefWidth="268.0" />
+      <Button id="finish" layoutX="636.0" layoutY="536.0" mnemonicParsing="false" onAction="#finishCar" prefHeight="50.0" prefWidth="150.0" text="Finish" />
+      <Button layoutX="14.0" layoutY="536.0" mnemonicParsing="false" onAction="#toEngineStepPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
+      <Label font="$x1" layoutX="297.0" layoutY="22.0" text="Choose a wheels" />
+      <Pane fx:id="wheelsDetailsPane" disable="false" layoutX="232.0" layoutY="191.0" prefHeight="200.0" prefWidth="337.0" visible="false">
         <children>
           <Label font="$x3" layoutX="99.0" layoutY="6.0" text="Wheels details" />
-          <Label font="$x2" layoutX="14.0" layoutY="38.0" text="Name" />
-          <Label font="$x2" layoutX="14.0" layoutY="85.0" text="Size" />
-          <Label font="$x2" layoutX="14.0" layoutY="134.0" text="Price" />
-          <Label fx:id="wheelsNameLabel" font="$x2" layoutX="147.0" layoutY="38.0" />
-          <Label fx:id="wheelsSizeLabel" font="$x2" layoutX="147.0" layoutY="85.0" />
-          <Label fx:id="wheelsPriceLabel" font="$x2" layoutX="147.0" layoutY="134.0" />
+          <Label font="$x2" layoutX="14.0" layoutY="42.0" text="Name" />
+          <Label font="$x2" layoutX="14.0" layoutY="92.0" text="Size" />
+          <Label font="$x2" layoutX="14.0" layoutY="142.0" text="Price" />
+          <Label fx:id="wheelsNameLabel" font="$x2" layoutX="147.0" layoutY="42.0" />
+          <Label fx:id="wheelsSizeLabel" font="$x2" layoutX="147.0" layoutY="92.0" />
+          <Label fx:id="wheelsPriceLabel" font="$x2" layoutX="147.0" layoutY="142.0" />
         </children>
       </Pane>
     </AnchorPane>
-    <Label fx:id="exceptionLabel" layoutX="230.0" layoutY="355.0" textFill="RED" />
+    <Label fx:id="exceptionLabel" alignment="CENTER" layoutX="299.0" layoutY="549.0" maxHeight="50.0" prefWidth="200.0" text="" textAlignment="LEFT" textFill="RED">
+      <font>
+        <Font size="18.0" />
+      </font>
+    </Label>
   </children>
 </AnchorPane>
