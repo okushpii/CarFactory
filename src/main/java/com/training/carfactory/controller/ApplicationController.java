@@ -4,8 +4,9 @@ import com.training.carfactory.controller.facade.ApplicationFacade;
 import com.training.carfactory.controller.facade.CarFacade;
 import com.training.carfactory.model.entity.Car;
 import com.training.carfactory.model.exception.ConnectionFailedException;
+import com.training.carfactory.model.exception.IncorrectResembleOrderException;
 import com.training.carfactory.model.exception.PartIsMissingException;
-import com.training.carfactory.model.service.context.ApplicationContext;
+import com.training.carfactory.controller.context.ApplicationContext;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -21,12 +22,10 @@ public class ApplicationController {
     private AnchorPane engineStep;
     @FXML
     private AnchorPane wheelsStep;
-    @FXML
-    private ListView<String> bodiesListView;
-    @FXML
-    private ComboBox<String> enginesList;
+
     @FXML
     private ComboBox<String> wheelsList;
+
     @FXML
     private TableView<Car> carTableView;
     @FXML
@@ -37,6 +36,9 @@ public class ApplicationController {
     private TableColumn<Car, String> engineColumn;
     @FXML
     private TableColumn<Car, String> wheelsColumn;
+
+    @FXML
+    private ListView<String> bodiesListView;
     @FXML
     private Pane bodyDetailsPane;
     @FXML
@@ -51,6 +53,9 @@ public class ApplicationController {
     private Button removeBodyButton;
     @FXML
     private ProgressBar bodyProgress;
+
+    @FXML
+    private ListView<String> engineListView;
     @FXML
     private Pane engineDetailsPane;
     @FXML
@@ -62,6 +67,13 @@ public class ApplicationController {
     @FXML
     private Label enginePriceLabel;
     @FXML
+    private Button installEngineButton;
+    @FXML
+    private Button removeEngineButton;
+    @FXML
+    private ProgressBar engineProgress;
+
+    @FXML
     private Pane wheelsDetailsPane;
     @FXML
     private Label wheelsNameLabel;
@@ -69,6 +81,7 @@ public class ApplicationController {
     private Label wheelsSizeLabel;
     @FXML
     private Label wheelsPriceLabel;
+
     @FXML
     private Label exceptionLabel;
 
@@ -93,7 +106,23 @@ public class ApplicationController {
     }
 
     public void removeBody(){
-        carFacade.removeBody(bodyProgress, installBodyButton, removeBodyButton);
+        try {
+            carFacade.removeBody(bodyProgress, installBodyButton, removeBodyButton);
+        } catch (IncorrectResembleOrderException ex){
+            exceptionLabel.setText(ex.getMessage());
+        }
+    }
+
+    public void installEngine(){
+        try {
+            carFacade.buildEngine(engineListView, engineProgress, installEngineButton, removeEngineButton);
+        } catch (PartIsMissingException ex){
+            exceptionLabel.setText(ex.getMessage());
+        }
+    }
+
+    public void removeEngine(){
+        carFacade.removeEngine(engineProgress, installEngineButton, removeEngineButton);
     }
 
     public void toEngineStepPage(){
@@ -101,7 +130,6 @@ public class ApplicationController {
     }
 
     public void toWheelsStepPage(){
-        carFacade.buildEngine(enginesList);
         switchToPage(wheelsStep);
     }
 
@@ -125,9 +153,9 @@ public class ApplicationController {
         applicationFacade.chooseBody(bodyDetailsPane, bodyNameLabel,
                 bodyTypeLabel, bodyPriceLabel, bodiesListView);
     }
-    public void chooseEngine(){
+    public void selectEngine(){
         applicationFacade.chooseEngine(engineDetailsPane, engineNameLabel,
-                engineVolumeLabel, enginePowerLabel, enginePriceLabel, enginesList);
+                engineVolumeLabel, enginePowerLabel, enginePriceLabel, engineListView);
     }
     public void chooseWheels(){
         applicationFacade.chooseWheels(wheelsDetailsPane, wheelsNameLabel, wheelsSizeLabel, wheelsPriceLabel, wheelsList);
@@ -140,7 +168,7 @@ public class ApplicationController {
 
     private void initElements() {
         try {
-            applicationFacade.initPartComboBoxes(menu, bodiesListView, enginesList, wheelsList, carTableView);
+            applicationFacade.initPartComboBoxes(menu, bodiesListView, engineListView, wheelsList, carTableView);
             applicationFacade.initCarTable(carTableView, carIdColumn, bodyColumn, engineColumn, wheelsColumn);
         } catch (ConnectionFailedException ex){
             exceptionLabel.setText("Some problems with connection");

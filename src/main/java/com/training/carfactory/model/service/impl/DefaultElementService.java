@@ -40,7 +40,7 @@ public class DefaultElementService implements ElementService {
     }
 
     @Override
-    public void initEngineElements(ComboBox<String> enginesList) {
+    public void initEngineElements(ListView<String> enginesList) {
         initEngines(enginesList);
     }
 
@@ -67,7 +67,7 @@ public class DefaultElementService implements ElementService {
                 stream().map(Body::getName).collect(Collectors.toList())));
     }
 
-    private void initEngines(ComboBox<String> enginesList){
+    private void initEngines(ListView<String> enginesList){
         enginesList.setItems(new ObservableListWrapper<>(engineService.getAll().
                 stream().map(Engine::getName).collect(Collectors.toList())));
     }

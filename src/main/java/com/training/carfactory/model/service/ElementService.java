@@ -10,7 +10,7 @@ public interface ElementService {
 
     void initBodyElements(ListView<String> bodiesListView);
 
-    void initEngineElements(ComboBox<String> enginesList);
+    void initEngineElements(ListView<String> enginesList);
 
     void initWheelsElements(ComboBox<String> wheelsList);
 

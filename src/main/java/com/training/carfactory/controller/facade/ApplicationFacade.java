@@ -28,7 +28,7 @@ public class ApplicationFacade {
         this.engineService = engineService;
         this.wheelsService = wheelsService;
     }
-    public void initPartComboBoxes(Node initialPage, ListView<String> bodiesListView, ComboBox<String> enginesList, ComboBox<String> wheelsList, TableView<Car> carTableView){
+    public void initPartComboBoxes(Node initialPage, ListView<String> bodiesListView, ListView<String> enginesList, ComboBox<String> wheelsList, TableView<Car> carTableView){
         pageService.setCurrentPage(initialPage);
         elementService.initBodyElements(bodiesListView);
         elementService.initEngineElements(enginesList);
@@ -48,21 +48,27 @@ public class ApplicationFacade {
 
     public void chooseBody(Pane bodyDetailsPane, Label bodyNameLabel,
                            Label bodyTypeLabel, Label bodyPriceLabel, ListView<String> bodiesListView){
-        bodyDetailsPane.setVisible(true);
-        Body body = Optional.of(bodyService.getByName(bodiesListView.getSelectionModel().getSelectedItem())).get();
-        bodyNameLabel.setText(body.getName());
-        bodyTypeLabel.setText(body.getType().toString());
-        bodyPriceLabel.setText(new BigDecimal(body.getPrice()).toString());
+        String selectedItem = bodiesListView.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            bodyDetailsPane.setVisible(true);
+            Body body = bodyService.getByName(selectedItem);
+            bodyNameLabel.setText(body.getName());
+            bodyTypeLabel.setText(body.getType().toString());
+            bodyPriceLabel.setText(new BigDecimal(body.getPrice()).toString());
+        }
     }
 
     public void chooseEngine(Pane engineDetailsPane, Label engineNameLabel, Label engineVolumeLabel,
-                             Label enginePowerLabel, Label enginePriceLabel, ComboBox<String> enginesList){
-        engineDetailsPane.setVisible(true);
-        Engine engine = Optional.of(engineService.getByName(enginesList.getValue())).get();
-        engineNameLabel.setText(engine.getName());
-        engineVolumeLabel.setText(engine.getVolume().toString());
-        enginePowerLabel.setText(engine.getPower().toString());
-        enginePriceLabel.setText(new BigDecimal(engine.getPrice()).toString());
+                             Label enginePowerLabel, Label enginePriceLabel, ListView<String> enginesList){
+        String selectedItem = enginesList.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            engineDetailsPane.setVisible(true);
+            Engine engine = engineService.getByName(selectedItem);
+            engineNameLabel.setText(engine.getName());
+            engineVolumeLabel.setText(engine.getVolume().toString());
+            enginePowerLabel.setText(engine.getPower().toString());
+            enginePriceLabel.setText(new BigDecimal(engine.getPrice()).toString());
+        }
     }
     public void chooseWheels(Pane wheelsDetailsPane, Label wheelsNameLabel,
                            Label wheelsSizeLabel, Label wheelsPriceLabel, ComboBox<String> wheelsList){

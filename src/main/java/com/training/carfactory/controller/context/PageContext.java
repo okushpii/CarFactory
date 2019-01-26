@@ -1,8 +1,6 @@
-package com.training.carfactory.model.service.context;
+package com.training.carfactory.controller.context;
 
 import javafx.scene.Node;
-
-import java.util.LinkedList;
 
 public class PageContext {
 

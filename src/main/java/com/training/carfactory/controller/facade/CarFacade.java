@@ -1,20 +1,22 @@
 package com.training.carfactory.controller.facade;
 
 import com.training.carfactory.model.entity.Car;
-import com.training.carfactory.model.entity.Part;
 import com.training.carfactory.model.exception.PartIsMissingException;
-import com.training.carfactory.model.service.*;
+import com.training.carfactory.model.service.BodyService;
+import com.training.carfactory.model.service.CarService;
+import com.training.carfactory.model.service.EngineService;
+import com.training.carfactory.model.service.WheelsService;
+import com.training.carfactory.model.service.impl.util.CarProperties;
+import com.training.carfactory.model.service.impl.util.PartVerifier;
 import com.training.carfactory.model.service.impl.util.PriceCalculationService;
 import com.training.carfactory.model.service.impl.util.ProgressBarSimulator;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
 
 
 public class CarFacade {
-
-    private static final long INITIAL_PRICE = 5000L;
-    private static final int BODY_ASSEMBLE_DELAY = 30;
-    private static final int BODY_RESEMBLE_DELAY = 20;
-    private static final String CUSTOMER = "DEFAULT";
 
     private BodyService bodyService;
     private EngineService engineService;
@@ -22,18 +24,21 @@ public class CarFacade {
     private CarService carService;
     private PriceCalculationService priceCalculationService;
     private ProgressBarSimulator progressBarSimulator;
+    private PartVerifier partVerifier;
 
     private Car car;
 
     public CarFacade(BodyService bodyService, EngineService engineService,
                      WheelsService wheelsService, CarService carService,
-                     PriceCalculationService priceCalculationService, ProgressBarSimulator progressBarSimulator) {
+                     PriceCalculationService priceCalculationService,
+                     ProgressBarSimulator progressBarSimulator, PartVerifier partVerifier) {
         this.bodyService = bodyService;
         this.engineService = engineService;
         this.wheelsService = wheelsService;
         this.carService = carService;
         this.priceCalculationService = priceCalculationService;
         this.progressBarSimulator = progressBarSimulator;
+        this.partVerifier = partVerifier;
     }
 
     public void buildBody(ListView<String> bodies, ProgressBar bodyProgressBar,
@@ -41,7 +46,7 @@ public class CarFacade {
         checkIfCarPresent();
         String selectedItem = bodies.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            progressBarSimulator.simulateProgress(bodyProgressBar, BODY_ASSEMBLE_DELAY, removeButton);
+            progressBarSimulator.simulateProgress(bodyProgressBar, CarProperties.BODY_ASSEMBLE_DELAY, removeButton);
             car.setBody(bodyService.getByName(selectedItem));
             car.setStatus(Car.Status.IN_PROGRESS);
             installButton.setDisable(true);
@@ -51,14 +56,31 @@ public class CarFacade {
     }
 
     public void removeBody(ProgressBar bodyProgress, Button installBodyButton, Button removeBodyButton) {
-        progressBarSimulator.simulateDownTimeProgress(bodyProgress, BODY_RESEMBLE_DELAY, installBodyButton);
+        partVerifier.verifyPartAbsent(car.getWheels(), "Wheels should be removed first");
+        partVerifier.verifyPartAbsent(car.getEngine(), "Engine should be removed first");
+        progressBarSimulator.simulateDownTimeProgress(bodyProgress, CarProperties.BODY_RESEMBLE_DELAY, installBodyButton);
+        car.setBody(null);
         removeBodyButton.setDisable(true);
     }
 
-    public void buildEngine(ComboBox<String> engines){
-        car.setStatus(Car.Status.IN_PROGRESS);
-        if (engines.getValue() != null)
-        car.setEngine(engineService.getByName(engines.getValue()));
+    public void buildEngine(ListView<String> engines, ProgressBar engineProgressBar,
+                            Button installButton, Button removeButton){
+        checkIfCarPresent();
+        String selectedItem = engines.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            partVerifier.verifyPartPresent(car.getBody(), "Body was not installed");
+            progressBarSimulator.simulateProgress(engineProgressBar, CarProperties.ENGINE_ASSEMBLE_DELAY, removeButton);
+            car.setEngine(engineService.getByName(selectedItem));
+            installButton.setDisable(true);
+        } else {
+            throw new PartIsMissingException("Engine is not chosen");
+        }
+    }
+
+    public void removeEngine(ProgressBar engineProgress, Button installEngineButton, Button removeEngineButton) {
+        progressBarSimulator.simulateDownTimeProgress(engineProgress, CarProperties.ENGINE_RESEMBLE_DELAY, installEngineButton);
+        car.setEngine(null);
+        removeEngineButton.setDisable(true);
     }
 
     public void buildWheels(ComboBox<String> wheels){
@@ -67,24 +89,12 @@ public class CarFacade {
     }
 
     public void finishCar(){
-        validateCar(car.getBody(), car.getEngine(), car.getWheels());
-        car.setCustomer(CUSTOMER);
+        partVerifier.verifyPartsPresent(car.getBody(), car.getEngine(), car.getWheels());
+        car.setCustomer(CarProperties.CUSTOMER);
         car.setStatus(Car.Status.DONE);
-        car.setPrice(priceCalculationService.calculatePrice(INITIAL_PRICE,
+        car.setPrice(priceCalculationService.calculatePrice(CarProperties.INITIAL_PRICE,
                 car.getBody().getPrice(), car.getEngine().getPrice(), car.getWheels().getPrice()));
         carService.addCar(car);
-    }
-
-    private void validateCar(Part...parts){
-        for (Part part : parts){
-            validatePart(part);
-        }
-    }
-
-    private void validatePart(Part part) {
-        if (part == null){
-            throw new PartIsMissingException("Some part is missing");
-        }
     }
 
     private void checkIfCarPresent() {

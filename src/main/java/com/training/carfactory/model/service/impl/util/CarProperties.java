@@ -1,0 +1,11 @@
+package com.training.carfactory.model.service.impl.util;
+
+public interface CarProperties {
+
+    Long INITIAL_PRICE = 5000L;
+    Integer BODY_ASSEMBLE_DELAY = 30;
+    Integer BODY_RESEMBLE_DELAY = 20;
+    String CUSTOMER = "DEFAULT";
+    Integer ENGINE_ASSEMBLE_DELAY = 50;
+    Integer ENGINE_RESEMBLE_DELAY = 30;
+}
