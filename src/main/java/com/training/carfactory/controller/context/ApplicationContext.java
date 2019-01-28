@@ -14,10 +14,7 @@ import com.training.carfactory.model.dao.impl.DefaultWheelsDao;
 import com.training.carfactory.model.dao.util.ConnectionFactory;
 import com.training.carfactory.model.service.*;
 import com.training.carfactory.model.service.impl.*;
-import com.training.carfactory.model.service.impl.util.PartVerifier;
-import com.training.carfactory.model.service.impl.util.PriceCalculationService;
-import com.training.carfactory.model.service.impl.util.ProgressBarSimulator;
-import com.training.carfactory.model.service.impl.util.ValueFormatterService;
+import com.training.carfactory.model.service.impl.util.*;
 
 public class ApplicationContext {
 
@@ -48,11 +45,14 @@ public class ApplicationContext {
         ValueFormatterService valueFormatterService = new ValueFormatterService();
         ProgressBarSimulator progressBarSimulator = new ProgressBarSimulator();
         PartVerifier partVerifier = new PartVerifier();
+        CarPropertyUpdater carPropertyUpdater = new CarPropertyUpdater(bodyService, engineService);
+        CarProgressService carProgressService = new CarProgressService(progressBarSimulator, carPropertyUpdater);
 
         ElementService elementService = new DefaultElementService(bodyService, engineService, wheelsService, carService, valueFormatterService);
 
         applicationFacade = new ApplicationFacade(pageService, elementService, bodyService, engineService, wheelsService);
-        carFacade = new CarFacade(bodyService, engineService, wheelsService, carService, priceCalculationService, progressBarSimulator, partVerifier);
+        carFacade = new CarFacade(bodyService, engineService, wheelsService,
+                carService, priceCalculationService, partVerifier, carProgressService);
     }
 
     public static ApplicationContext getInstance() {

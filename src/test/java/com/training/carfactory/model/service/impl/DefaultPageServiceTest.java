@@ -1,6 +1,6 @@
 package com.training.carfactory.model.service.impl;
 
-import com.training.carfactory.model.service.context.PageContext;
+import com.training.carfactory.controller.context.PageContext;
 import javafx.scene.layout.AnchorPane;
 import org.junit.Before;
 import org.junit.Test;
