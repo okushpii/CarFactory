@@ -8,4 +8,6 @@ public interface CarProperties {
     String CUSTOMER = "DEFAULT";
     Integer ENGINE_ASSEMBLE_DELAY = 50;
     Integer ENGINE_RESEMBLE_DELAY = 30;
+    Integer WHEELS_ASSEMBLE_DELAY = 70;
+    Integer WHEELS_RESEMBLE_DELAY = 40;
 }

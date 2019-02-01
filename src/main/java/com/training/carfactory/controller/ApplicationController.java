@@ -22,10 +22,6 @@ public class ApplicationController {
     private AnchorPane engineStep;
     @FXML
     private AnchorPane wheelsStep;
-
-    @FXML
-    private ComboBox<String> wheelsList;
-
     @FXML
     private TableView<Car> carTableView;
     @FXML
@@ -74,6 +70,8 @@ public class ApplicationController {
     private ProgressBar engineProgress;
 
     @FXML
+    private ListView<String> wheelsListView;
+    @FXML
     private Pane wheelsDetailsPane;
     @FXML
     private Label wheelsNameLabel;
@@ -81,6 +79,12 @@ public class ApplicationController {
     private Label wheelsSizeLabel;
     @FXML
     private Label wheelsPriceLabel;
+    @FXML
+    private Button installWheelsButton;
+    @FXML
+    private Button removeWheelsButton;
+    @FXML
+    private ProgressBar wheelsProgress;
 
     @FXML
     private Label exceptionLabel;
@@ -129,6 +133,18 @@ public class ApplicationController {
         switchToPage(engineStep);
     }
 
+    public void installWheels(){
+        try {
+            carFacade.buildWheels(wheelsListView, wheelsProgress, installWheelsButton, removeWheelsButton);
+        } catch (PartIsMissingException ex){
+            exceptionLabel.setText(ex.getMessage());
+        }
+    }
+
+    public void removeWheels(){
+        carFacade.removeWheels(wheelsProgress, installWheelsButton, removeWheelsButton);
+    }
+
     public void toWheelsStepPage(){
         switchToPage(wheelsStep);
     }
@@ -138,7 +154,6 @@ public class ApplicationController {
     }
 
     public void finishCar(){
-        carFacade.buildWheels(wheelsList);
         try {
             carFacade.finishCar();
             switchToPage(menu);
@@ -157,8 +172,8 @@ public class ApplicationController {
         applicationFacade.chooseEngine(engineDetailsPane, engineNameLabel,
                 engineVolumeLabel, enginePowerLabel, enginePriceLabel, engineListView);
     }
-    public void chooseWheels(){
-        applicationFacade.chooseWheels(wheelsDetailsPane, wheelsNameLabel, wheelsSizeLabel, wheelsPriceLabel, wheelsList);
+    public void selectWheels(){
+        applicationFacade.chooseWheels(wheelsDetailsPane, wheelsNameLabel, wheelsSizeLabel, wheelsPriceLabel, wheelsListView);
     }
 
     private void switchToPage(AnchorPane node){
@@ -168,7 +183,7 @@ public class ApplicationController {
 
     private void initElements() {
         try {
-            applicationFacade.initPartComboBoxes(menu, bodiesListView, engineListView, wheelsList, carTableView);
+            applicationFacade.initPartComboBoxes(menu, bodiesListView, engineListView, wheelsListView, carTableView);
             applicationFacade.initCarTable(carTableView, carIdColumn, bodyColumn, engineColumn, wheelsColumn);
         } catch (ConnectionFailedException ex){
             exceptionLabel.setText("Some problems with connection");

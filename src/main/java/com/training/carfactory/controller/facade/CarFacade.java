@@ -11,7 +11,6 @@ import com.training.carfactory.model.service.impl.util.PartVerifier;
 import com.training.carfactory.model.service.impl.util.PriceCalculationService;
 import com.training.carfactory.model.service.impl.util.ProgressBarSimulator;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 
@@ -83,9 +82,24 @@ public class CarFacade {
         removeEngineButton.setDisable(true);
     }
 
-    public void buildWheels(ComboBox<String> wheels){
-        if (wheels.getValue() != null)
-        car.setWheels(wheelsService.getByName(wheels.getValue()));
+    public void buildWheels(ListView<String> wheels, ProgressBar wheelsProgressBar,
+                            Button installButton, Button removeButton){
+        checkIfCarPresent();
+        String selectedItem = wheels.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            partVerifier.verifyPartPresent(car.getBody(), "Body was not installed");
+            progressBarSimulator.simulateProgress(wheelsProgressBar, CarProperties.WHEELS_ASSEMBLE_DELAY, removeButton);
+            car.setWheels(wheelsService.getByName(selectedItem));
+            installButton.setDisable(true);
+        } else {
+            throw new PartIsMissingException("Wheels is not chosen");
+        }
+    }
+
+    public void removeWheels(ProgressBar wheelsProgress, Button installWheelsButton, Button removeWheelsButton) {
+        progressBarSimulator.simulateDownTimeProgress(wheelsProgress, CarProperties.WHEELS_RESEMBLE_DELAY, installWheelsButton);
+        car.setWheels(null);
+        removeWheelsButton.setDisable(true);
     }
 
     public void finishCar(){

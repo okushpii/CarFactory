@@ -10,7 +10,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 public class ApplicationFacade {
 
@@ -28,7 +27,7 @@ public class ApplicationFacade {
         this.engineService = engineService;
         this.wheelsService = wheelsService;
     }
-    public void initPartComboBoxes(Node initialPage, ListView<String> bodiesListView, ListView<String> enginesList, ComboBox<String> wheelsList, TableView<Car> carTableView){
+    public void initPartComboBoxes(Node initialPage, ListView<String> bodiesListView, ListView<String> enginesList, ListView<String> wheelsList, TableView<Car> carTableView){
         pageService.setCurrentPage(initialPage);
         elementService.initBodyElements(bodiesListView);
         elementService.initEngineElements(enginesList);
@@ -71,11 +70,14 @@ public class ApplicationFacade {
         }
     }
     public void chooseWheels(Pane wheelsDetailsPane, Label wheelsNameLabel,
-                           Label wheelsSizeLabel, Label wheelsPriceLabel, ComboBox<String> wheelsList){
-        wheelsDetailsPane.setVisible(true);
-        Wheels wheels = Optional.of(wheelsService.getByName(wheelsList.getValue())).get();
-        wheelsNameLabel.setText(wheels.getName());
-        wheelsSizeLabel.setText(wheels.getSize().toString());
-        wheelsPriceLabel.setText(new BigDecimal(wheels.getPrice()).toString());
+                           Label wheelsSizeLabel, Label wheelsPriceLabel, ListView<String> wheelsList) {
+        String selectedItem = wheelsList.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            wheelsDetailsPane.setVisible(true);
+            Wheels wheels = wheelsService.getByName(selectedItem);
+            wheelsNameLabel.setText(wheels.getName());
+            wheelsSizeLabel.setText(wheels.getSize().toString());
+            wheelsPriceLabel.setText(new BigDecimal(wheels.getPrice()).toString());
+        }
     }
 }
