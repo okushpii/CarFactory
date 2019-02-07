@@ -88,21 +88,26 @@
       <Button fx:id="removeEngineButton" cancelButton="false" defaultButton="false" disable="true" layoutX="459.0" layoutY="436.0" mnemonicParsing="false" onAction="#removeEngine" prefHeight="30.0" prefWidth="80.0" text="Remove" textOverrun="ELLIPSIS" />
     </AnchorPane>
     <AnchorPane fx:id="wheelsStep" prefHeight="600.0" prefWidth="800.0" visible="false">
-      <ComboBox fx:id="wheelsList" layoutX="281.0" layoutY="85.0" onAction="#chooseWheels" prefHeight="21.0" prefWidth="268.0" />
       <Button id="finish" layoutX="636.0" layoutY="536.0" mnemonicParsing="false" onAction="#finishCar" prefHeight="50.0" prefWidth="150.0" text="Finish" />
       <Button layoutX="14.0" layoutY="536.0" mnemonicParsing="false" onAction="#toEngineStepPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
       <Label font="$x1" layoutX="297.0" layoutY="22.0" text="Choose a wheels" />
-      <Pane fx:id="wheelsDetailsPane" disable="false" layoutX="232.0" layoutY="191.0" prefHeight="200.0" prefWidth="337.0" visible="false">
-        <children>
-          <Label font="$x3" layoutX="99.0" layoutY="6.0" text="Wheels details" />
-          <Label font="$x2" layoutX="14.0" layoutY="42.0" text="Name" />
-          <Label font="$x2" layoutX="14.0" layoutY="92.0" text="Size" />
-          <Label font="$x2" layoutX="14.0" layoutY="142.0" text="Price" />
-          <Label fx:id="wheelsNameLabel" font="$x2" layoutX="147.0" layoutY="42.0" />
-          <Label fx:id="wheelsSizeLabel" font="$x2" layoutX="147.0" layoutY="92.0" />
-          <Label fx:id="wheelsPriceLabel" font="$x2" layoutX="147.0" layoutY="142.0" />
-        </children>
+      <Pane id="bodyDetailsPane" fx:id="wheelsDetailsPane" layoutX="379.0" layoutY="90.0" prefHeight="250.0" prefWidth="340.0" visible="true">
+        <Label font="$x3" layoutX="99.0" layoutY="6.0" text="Wheels details" />
+        <Pane id="bodyDetailsText" layoutX="-1.0" layoutY="64.0" prefHeight="150.0" prefWidth="340.0">
+          <children>
+            <Label font="$x2" layoutX="50.0" layoutY="10.0" text="Name" />
+            <Label font="$x2" layoutX="50.0" layoutY="60.0" text="Size" />
+            <Label font="$x2" layoutX="50.0" layoutY="110.0" text="Price" />
+            <Label id="bodyNameLabel" fx:id="wheelsNameLabel" font="$x2" layoutX="200.0" layoutY="10.0" />
+            <Label id="bodyTypeLabel" fx:id="wheelsSizeLabel" font="$x2" layoutX="200.0" layoutY="60.0" />
+            <Label id="bodyPriceLabel" fx:id="wheelsPriceLabel" font="$x2" layoutX="200.0" layoutY="110.0" />
+          </children>
+        </Pane>
       </Pane>
+      <ListView fx:id="wheelsListView" layoutX="44.0" layoutY="100.0" onMouseClicked="#selectWheels" prefHeight="400.0" prefWidth="270.0" />
+      <ProgressBar fx:id="wheelsProgress" layoutX="378.0" layoutY="470.0" prefHeight="30.0" prefWidth="340.0" progress="0.0" />
+      <Button fx:id="installWheelsButton" cancelButton="false" defaultButton="false" layoutX="379.0" layoutY="440.0" mnemonicParsing="false" onAction="#installWheels" prefHeight="30.0" prefWidth="80.0" text="Install" textOverrun="ELLIPSIS" />
+      <Button fx:id="removeWheelsButton" cancelButton="false" defaultButton="false" disable="true" layoutX="459.0" layoutY="440.0" mnemonicParsing="false" onAction="#removeWheels" prefHeight="30.0" prefWidth="80.0" text="Remove" textOverrun="ELLIPSIS" />
     </AnchorPane>
     <Label fx:id="exceptionLabel" alignment="CENTER" layoutX="200.0" layoutY="549.0" maxHeight="50.0" prefWidth="400.0" text="" textAlignment="LEFT" textFill="RED">
       <font>

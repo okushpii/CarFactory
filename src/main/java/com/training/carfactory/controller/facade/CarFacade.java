@@ -70,9 +70,20 @@ public class CarFacade {
         carProgressService.removeEngine(engineProgress, car, installEngineButton, removeEngineButton);
     }
 
-    public void buildWheels(ComboBox<String> wheels) {
-        if (wheels.getValue() != null)
-            car.setWheels(wheelsService.getByName(wheels.getValue()));
+    public void buildWheels(ListView<String> wheels, ProgressBar wheelsProgressBar,
+                            Button installButton, Button removeButton){
+        checkIfCarPresent();
+        String selectedItem = wheels.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            partVerifier.verifyPartPresent(car.getBody(), "Body was not installed");
+            carProgressService.installWheels(wheelsProgressBar, car, selectedItem, installButton, removeButton);
+        } else {
+            throw new PartIsMissingException("Wheels is not chosen");
+        }
+    }
+
+    public void removeWheels(ProgressBar wheelsProgress, Button installWheelsButton, Button removeWheelsButton) {
+        carProgressService.removeWheels(wheelsProgress, car, installWheelsButton, removeWheelsButton);
     }
 
     public void finishCar() {
