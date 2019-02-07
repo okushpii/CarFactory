@@ -46,14 +46,29 @@ public class CarProgressService {
         verifyOtherPartsStatus();
         CountDownLatch cdl = new CountDownLatch(1);
         removeButton.setDisable(true);
-        car.setBody(null);
         progressBarSimulator.simulateDownTimeProgress(engineProgressBar, 30, cdl);
         carPropertyUpdater.updateAfterEngineRemove(car, installButton, cdl);
     }
 
+    public void installWheels(ProgressBar wheelsProgressBar, Car car, String selectedWheels, Button installButton, Button removeButton){
+        verifyOtherPartsStatus();
+        CountDownLatch cdl = new CountDownLatch(1);
+        installButton.setDisable(true);
+        progressBarSimulator.simulateProgress(wheelsProgressBar, 50, cdl);
+        carPropertyUpdater.updateAfterWheelsInstall(car, selectedWheels, removeButton, cdl);
+    }
+
+    public void removeWheels(ProgressBar wheelsProgressBar, Car car, Button installButton, Button removeButton){
+        verifyOtherPartsStatus();
+        CountDownLatch cdl = new CountDownLatch(1);
+        removeButton.setDisable(true);
+        progressBarSimulator.simulateDownTimeProgress(wheelsProgressBar, 30, cdl);
+        carPropertyUpdater.updateAfterWheelsRemove(car, installButton, cdl);
+    }
+
     public void verifyOtherPartsStatus(){
         if (ProgressBarSimulator.getStatus() == PartStatus.INSTALLING){
-            throw new IncorrectResembleOrderException("Part can`t be removed now");
+            throw new IncorrectResembleOrderException("Part can`t be installed or removed now");
         } else if (ProgressBarSimulator.getStatus() == PartStatus.REMOVING){
             throw new PartIsMissingException("Part can`t be installed now");
         }

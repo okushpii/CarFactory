@@ -8,7 +8,6 @@ import com.training.carfactory.model.entity.Wheels;
 import com.training.carfactory.model.service.*;
 import com.training.carfactory.model.service.impl.util.ValueFormatterService;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -45,8 +44,8 @@ public class DefaultElementService implements ElementService {
     }
 
     @Override
-    public void initWheelsElements(ComboBox<String> wheelsList) {
-        initWheelsList(wheelsList);
+    public void initWheelsElements(ListView<String> wheelsList) {
+        initWheels(wheelsList);
     }
 
     @Override
@@ -72,7 +71,7 @@ public class DefaultElementService implements ElementService {
                 stream().map(Engine::getName).collect(Collectors.toList())));
     }
 
-    private void initWheelsList(ComboBox<String> wheelsList){
+    private void initWheels(ListView<String> wheelsList){
         wheelsList.setItems(new ObservableListWrapper<>(wheelsService.getAll().
                 stream().map(Wheels::getName).collect(Collectors.toList())));
     }

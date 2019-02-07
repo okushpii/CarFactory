@@ -22,10 +22,6 @@ public class ApplicationController {
     private AnchorPane engineStep;
     @FXML
     private AnchorPane wheelsStep;
-
-    @FXML
-    private ComboBox<String> wheelsList;
-
     @FXML
     private TableView<Car> carTableView;
     @FXML
@@ -74,6 +70,8 @@ public class ApplicationController {
     private ProgressBar engineProgress;
 
     @FXML
+    private ListView<String> wheelsListView;
+    @FXML
     private Pane wheelsDetailsPane;
     @FXML
     private Label wheelsNameLabel;
@@ -81,6 +79,12 @@ public class ApplicationController {
     private Label wheelsSizeLabel;
     @FXML
     private Label wheelsPriceLabel;
+    @FXML
+    private Button installWheelsButton;
+    @FXML
+    private Button removeWheelsButton;
+    @FXML
+    private ProgressBar wheelsProgress;
 
     @FXML
     private Label exceptionLabel;
@@ -88,48 +92,68 @@ public class ApplicationController {
     private ApplicationFacade applicationFacade;
     private CarFacade carFacade;
 
-    public void initialize(){
+    public void initialize() {
         ApplicationContext.getInstance().initController(this);
         initElements();
     }
 
-    public void toBodyStepPage(){
+    public void toBodyStepPage() {
         switchToPage(bodyStep);
     }
 
-    public void installBody(){
+    public void installBody() {
         try {
             carFacade.buildBody(bodiesListView, bodyProgress, installBodyButton, removeBodyButton);
-        } catch (PartIsMissingException ex){
+        } catch (PartIsMissingException ex) {
             exceptionLabel.setText(ex.getMessage());
         }
     }
 
-    public void removeBody(){
+    public void removeBody() {
         try {
             carFacade.removeBody(bodyProgress, installBodyButton, removeBodyButton);
-        } catch (IncorrectResembleOrderException ex){
+        } catch (IncorrectResembleOrderException ex) {
             exceptionLabel.setText(ex.getMessage());
         }
     }
 
-    public void installEngine(){
+    public void installEngine() {
         try {
             carFacade.buildEngine(engineListView, engineProgress, installEngineButton, removeEngineButton);
-        } catch (PartIsMissingException ex){
+        } catch (PartIsMissingException | IncorrectResembleOrderException ex) {
             exceptionLabel.setText(ex.getMessage());
         }
     }
 
-    public void removeEngine(){
-        carFacade.removeEngine(engineProgress, installEngineButton, removeEngineButton);
+    public void removeEngine() {
+        try {
+            carFacade.removeEngine(engineProgress, installEngineButton, removeEngineButton);
+        } catch (IncorrectResembleOrderException ex) {
+            exceptionLabel.setText(ex.getMessage());
+        }
     }
 
-    public void toEngineStepPage(){
+    public void toEngineStepPage() {
         switchToPage(engineStep);
     }
 
-    public void toWheelsStepPage(){
+    public void installWheels() {
+        try {
+            carFacade.buildWheels(wheelsListView, wheelsProgress, installWheelsButton, removeWheelsButton);
+        } catch (PartIsMissingException | IncorrectResembleOrderException ex) {
+            exceptionLabel.setText(ex.getMessage());
+        }
+    }
+
+    public void removeWheels() {
+        try {
+            carFacade.removeWheels(wheelsProgress, installWheelsButton, removeWheelsButton);
+        } catch (IncorrectResembleOrderException ex) {
+            exceptionLabel.setText(ex.getMessage());
+        }
+    }
+
+    public void toWheelsStepPage() {
         switchToPage(wheelsStep);
     }
 
@@ -137,40 +161,41 @@ public class ApplicationController {
         switchToPage(menu);
     }
 
-    public void finishCar(){
-        carFacade.buildWheels(wheelsList);
+    public void finishCar() {
         try {
             carFacade.finishCar();
             switchToPage(menu);
             applicationFacade.initCarTable(carTableView, carIdColumn, bodyColumn, engineColumn, wheelsColumn);
-        } catch (PartIsMissingException ex){
+        } catch (PartIsMissingException ex) {
             exceptionLabel.setText(ex.getMessage());
         }
     }
 
-    public void selectBody(){
+    public void selectBody() {
         exceptionLabel.setText("");
         applicationFacade.chooseBody(bodyDetailsPane, bodyNameLabel,
                 bodyTypeLabel, bodyPriceLabel, bodiesListView);
     }
-    public void selectEngine(){
+
+    public void selectEngine() {
         applicationFacade.chooseEngine(engineDetailsPane, engineNameLabel,
                 engineVolumeLabel, enginePowerLabel, enginePriceLabel, engineListView);
     }
-    public void chooseWheels(){
-        applicationFacade.chooseWheels(wheelsDetailsPane, wheelsNameLabel, wheelsSizeLabel, wheelsPriceLabel, wheelsList);
+
+    public void selectWheels() {
+        applicationFacade.chooseWheels(wheelsDetailsPane, wheelsNameLabel, wheelsSizeLabel, wheelsPriceLabel, wheelsListView);
     }
 
-    private void switchToPage(AnchorPane node){
+    private void switchToPage(AnchorPane node) {
         exceptionLabel.setText("");
         applicationFacade.toPage(node);
     }
 
     private void initElements() {
         try {
-            applicationFacade.initPartComboBoxes(menu, bodiesListView, engineListView, wheelsList, carTableView);
+            applicationFacade.initPartComboBoxes(menu, bodiesListView, engineListView, wheelsListView, carTableView);
             applicationFacade.initCarTable(carTableView, carIdColumn, bodyColumn, engineColumn, wheelsColumn);
-        } catch (ConnectionFailedException ex){
+        } catch (ConnectionFailedException ex) {
             exceptionLabel.setText("Some problems with connection");
         }
     }

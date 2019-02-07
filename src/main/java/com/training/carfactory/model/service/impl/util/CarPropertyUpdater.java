@@ -1,8 +1,10 @@
 package com.training.carfactory.model.service.impl.util;
 
 import com.training.carfactory.model.entity.Car;
+import com.training.carfactory.model.entity.Wheels;
 import com.training.carfactory.model.service.BodyService;
 import com.training.carfactory.model.service.EngineService;
+import com.training.carfactory.model.service.WheelsService;
 import javafx.scene.control.Button;
 
 import java.util.concurrent.CountDownLatch;
@@ -12,10 +14,13 @@ public class CarPropertyUpdater {
 
     private BodyService bodyService;
     private EngineService engineService;
+    private WheelsService wheelsService;
 
-    public CarPropertyUpdater(BodyService bodyService, EngineService engineService) {
+    public CarPropertyUpdater(BodyService bodyService, EngineService engineService, WheelsService wheelsService) {
         this.bodyService = bodyService;
         this.engineService = engineService;
+        this.wheelsService = wheelsService;
+
     }
 
     public void updateAfterBodyInstall(Car car, String selectedBody, Button btn, CountDownLatch cdl) {
@@ -48,6 +53,21 @@ public class CarPropertyUpdater {
         new Thread(() -> {
             await(cdl);
             car.setEngine(null);
+            btn.setDisable(false);
+        }).start();
+    }
+    public void updateAfterWheelsInstall(Car car, String selectedWheels, Button btn, CountDownLatch cdl) {
+        new Thread(() -> {
+            await(cdl);
+            car.setWheels(wheelsService.getByName(selectedWheels));
+            btn.setDisable(false);
+        }).start();
+    }
+
+    public void updateAfterWheelsRemove(Car car, Button btn, CountDownLatch cdl){
+        new Thread(() -> {
+            await(cdl);
+            car.setWheels(null);
             btn.setDisable(false);
         }).start();
     }
