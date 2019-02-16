@@ -1,103 +1,83 @@
 package com.training.carfactory.controller.facade;
 
+import com.training.carfactory.controller.context.CarContext;
 import com.training.carfactory.model.entity.Car;
 import com.training.carfactory.model.exception.PartIsMissingException;
-import com.training.carfactory.model.service.BodyService;
-import com.training.carfactory.model.service.CarService;
-import com.training.carfactory.model.service.EngineService;
-import com.training.carfactory.model.service.WheelsService;
 import com.training.carfactory.model.service.impl.util.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.*;
 
 
 public class CarFacade {
 
-    private BodyService bodyService;
-    private EngineService engineService;
-    private WheelsService wheelsService;
-    private CarService carService;
-    private PriceCalculationService priceCalculationService;
     private PartVerifier partVerifier;
     private CarProgressService carProgressService;
 
-    private Car car;
+    private CarContext carContext;
 
-    public CarFacade(BodyService bodyService, EngineService engineService,
-                     WheelsService wheelsService, CarService carService,
-                     PriceCalculationService priceCalculationService, PartVerifier partVerifier, CarProgressService carProgressService) {
-        this.bodyService = bodyService;
-        this.engineService = engineService;
-        this.wheelsService = wheelsService;
-        this.carService = carService;
-        this.priceCalculationService = priceCalculationService;
+    public CarFacade(PartVerifier partVerifier, CarProgressService carProgressService, CarContext carContext) {
         this.partVerifier = partVerifier;
+        this.carContext = carContext;
         this.carProgressService = carProgressService;
     }
 
     public void buildBody(ListView<String> bodies, ProgressBar bodyProgressBar,
-                          Button installButton, Button removeButton) {
+                          Button installButton, Label carBodyLabel, Button removeButton) {
         checkIfCarPresent();
         String selectedItem = bodies.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            carProgressService.installBody(bodyProgressBar, car, selectedItem, installButton, removeButton);
+            carProgressService.installBody(bodyProgressBar, selectedItem, carBodyLabel, installButton, removeButton);
         } else {
-            throw new PartIsMissingException("Body is not chosen");
+            throw new PartIsMissingException(Messages.BODY_IS_NOT_CHOSEN);
         }
     }
 
-    public void removeBody(ProgressBar bodyProgress, Button installBodyButton, Button removeBodyButton) {
-        partVerifier.verifyPartAbsent(car.getWheels(), "Wheels should be removed first");
-        partVerifier.verifyPartAbsent(car.getEngine(), "Engine should be removed first");
-        carProgressService.removeBody(bodyProgress, car, installBodyButton, removeBodyButton);
+    public void removeBody(ProgressBar bodyProgress, Button installBodyButton, Label carBodyLabel, Button removeBodyButton) {
+        partVerifier.verifyPartAbsent(carContext.getCar().getWheels(), Messages.WHEELS_SHOULD_BE_REMOVED_FIRST);
+        partVerifier.verifyPartAbsent(carContext.getCar().getEngine(), Messages.ENGINE_SHOULD_BE_REMOVED_FIRST);
+        carProgressService.removeBody(bodyProgress, installBodyButton, carBodyLabel, removeBodyButton);
     }
 
     public void buildEngine(ListView<String> engines, ProgressBar engineProgressBar,
-                            Button installButton, Button removeButton) {
+                            Button installButton, Label carEngineLabel, Button removeButton) {
         checkIfCarPresent();
         String selectedItem = engines.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            partVerifier.verifyPartPresent(car.getBody(), "Body was not installed");
-            carProgressService.installEngine(engineProgressBar, car, selectedItem, installButton, removeButton);
+            partVerifier.verifyPartPresent(carContext.getCar().getBody(), Messages.BODY_WAS_NOT_INSTALLED);
+            carProgressService.installEngine(engineProgressBar, selectedItem, carEngineLabel, installButton, removeButton);
         } else {
-            throw new PartIsMissingException("Engine is not chosen");
+            throw new PartIsMissingException(Messages.ENGINE_IS_NOT_CHOSEN);
         }
     }
 
-    public void removeEngine(ProgressBar engineProgress, Button installEngineButton, Button removeEngineButton) {
-        carProgressService.removeEngine(engineProgress, car, installEngineButton, removeEngineButton);
+    public void removeEngine(ProgressBar engineProgress, Button installEngineButton, Label carEngineLabel, Button removeEngineButton) {
+        carProgressService.removeEngine(engineProgress, installEngineButton, carEngineLabel, removeEngineButton);
     }
 
     public void buildWheels(ListView<String> wheels, ProgressBar wheelsProgressBar,
-                            Button installButton, Button removeButton){
+                            Button installButton, Label carWheelsLabel, Button removeButton){
         checkIfCarPresent();
         String selectedItem = wheels.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            partVerifier.verifyPartPresent(car.getBody(), "Body was not installed");
-            carProgressService.installWheels(wheelsProgressBar, car, selectedItem, installButton, removeButton);
+            partVerifier.verifyPartPresent(carContext.getCar().getBody(), Messages.BODY_WAS_NOT_INSTALLED);
+            carProgressService.installWheels(wheelsProgressBar, selectedItem, carWheelsLabel, installButton, removeButton);
         } else {
-            throw new PartIsMissingException("Wheels is not chosen");
+            throw new PartIsMissingException(Messages.WHEELS_ARE_NOT_CHOSEN);
         }
     }
 
-    public void removeWheels(ProgressBar wheelsProgress, Button installWheelsButton, Button removeWheelsButton) {
-        carProgressService.removeWheels(wheelsProgress, car, installWheelsButton, removeWheelsButton);
+    public void removeWheels(ProgressBar wheelsProgress, Button installWheelsButton, Label carWheelsLabel, Button removeWheelsButton) {
+        carProgressService.removeWheels(wheelsProgress, installWheelsButton, carWheelsLabel, removeWheelsButton);
     }
 
-    public void finishCar() {
-        partVerifier.verifyPartsPresent(car.getBody(), car.getEngine(), car.getWheels());
-        car.setCustomer(CarProperties.CUSTOMER);
-        car.setStatus(Car.Status.DONE);
-        car.setPrice(priceCalculationService.calculatePrice(CarProperties.INITIAL_PRICE,
-                car.getBody().getPrice(), car.getEngine().getPrice(), car.getWheels().getPrice()));
-        carService.addCar(car);
+    public void finishCar(ProgressBar carProgress, Button finishCarButton) {
+        checkIfCarPresent();
+        partVerifier.verifyPartsPresent(carContext.getCar().getBody(), carContext.getCar().getEngine(), carContext.getCar().getWheels());
+        carProgressService.buildCar(carProgress, finishCarButton);
     }
 
     private void checkIfCarPresent() {
-        if (car == null) {
-            car = new Car();
+        if (carContext.getCar() == null) {
+            carContext.setCar(new Car());
         }
     }
 }

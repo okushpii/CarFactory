@@ -38,6 +38,7 @@ public class ApplicationContext {
 
         BodyService bodyService = new DefaultBodyService(bodyDao);
         PageContext pageContext = new PageContext();
+        CarContext carContext = new CarContext();
         PageService pageService = new DefaultPageService(pageContext);
         CarService carService = new DefaultCarService(carDao);
 
@@ -45,14 +46,14 @@ public class ApplicationContext {
         ValueFormatterService valueFormatterService = new ValueFormatterService();
         ProgressBarSimulator progressBarSimulator = new ProgressBarSimulator();
         PartVerifier partVerifier = new PartVerifier();
-        CarPropertyUpdater carPropertyUpdater = new CarPropertyUpdater(bodyService, engineService, wheelsService);
+        CarPropertyUpdater carPropertyUpdater = new CarPropertyUpdater(bodyService, engineService, wheelsService,
+                valueFormatterService, carService, priceCalculationService, carContext);
         CarProgressService carProgressService = new CarProgressService(progressBarSimulator, carPropertyUpdater);
 
         ElementService elementService = new DefaultElementService(bodyService, engineService, wheelsService, carService, valueFormatterService);
 
-        applicationFacade = new ApplicationFacade(pageService, elementService, bodyService, engineService, wheelsService);
-        carFacade = new CarFacade(bodyService, engineService, wheelsService,
-                carService, priceCalculationService, partVerifier, carProgressService);
+        applicationFacade = new ApplicationFacade(pageService, elementService, bodyService, engineService, wheelsService, carContext);
+        carFacade = new CarFacade(partVerifier, carProgressService, carContext);
     }
 
     public static ApplicationContext getInstance() {

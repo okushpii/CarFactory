@@ -88,7 +88,7 @@
       <Button fx:id="removeEngineButton" cancelButton="false" defaultButton="false" disable="true" layoutX="459.0" layoutY="436.0" mnemonicParsing="false" onAction="#removeEngine" prefHeight="30.0" prefWidth="80.0" text="Remove" textOverrun="ELLIPSIS" />
     </AnchorPane>
     <AnchorPane fx:id="wheelsStep" prefHeight="600.0" prefWidth="800.0" visible="false">
-      <Button id="finish" layoutX="636.0" layoutY="536.0" mnemonicParsing="false" onAction="#finishCar" prefHeight="50.0" prefWidth="150.0" text="Finish" />
+      <Button id="finish" layoutX="636.0" layoutY="536.0" mnemonicParsing="false" onAction="#toFinalStepPage" prefHeight="50.0" prefWidth="150.0" text="Finish" />
       <Button layoutX="14.0" layoutY="536.0" mnemonicParsing="false" onAction="#toEngineStepPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
       <Label font="$x1" layoutX="297.0" layoutY="22.0" text="Choose a wheels" />
       <Pane id="bodyDetailsPane" fx:id="wheelsDetailsPane" layoutX="379.0" layoutY="90.0" prefHeight="250.0" prefWidth="340.0" visible="true">
@@ -108,6 +108,22 @@
       <ProgressBar fx:id="wheelsProgress" layoutX="378.0" layoutY="470.0" prefHeight="30.0" prefWidth="340.0" progress="0.0" />
       <Button fx:id="installWheelsButton" cancelButton="false" defaultButton="false" layoutX="379.0" layoutY="440.0" mnemonicParsing="false" onAction="#installWheels" prefHeight="30.0" prefWidth="80.0" text="Install" textOverrun="ELLIPSIS" />
       <Button fx:id="removeWheelsButton" cancelButton="false" defaultButton="false" disable="true" layoutX="459.0" layoutY="440.0" mnemonicParsing="false" onAction="#removeWheels" prefHeight="30.0" prefWidth="80.0" text="Remove" textOverrun="ELLIPSIS" />
+    </AnchorPane>
+    <AnchorPane fx:id="finalStep" layoutX="0.0" layoutY="0.0" prefHeight="600.0" prefWidth="800.0" visible="false">
+      <Label font="$x1" layoutX="333.0" layoutY="28.0" text="Final step" />
+      <Label layoutX="83.0" layoutY="86.0" text="Body:">
+        <font>
+          <Font size="28.0" fx:id="x4" />
+        </font>
+      </Label>
+      <Label font="$x4" layoutX="83.0" layoutY="153.0" text="Engine:" />
+      <Label font="$x4" layoutX="83.0" layoutY="222.0" text="Wheels:" />
+      <Label fx:id="bodyCarLabel" font="$x4" layoutX="333.0" layoutY="86.0" text="Part is not installed" />
+      <Label fx:id="engineCarLabel" font="$x4" layoutX="333.0" layoutY="153.0" text="Part is not installed" />
+      <Label fx:id="wheelsCarLabel" font="$x4" layoutX="333.0" layoutY="222.0" text="Part is not installed" />
+      <ProgressBar fx:id="carProgress" layoutX="152.0" layoutY="371.0" prefHeight="43.0" prefWidth="491.0" progress="0.0" />
+      <Button fx:id="finishCarButton" layoutX="315.0" layoutY="428.0" mnemonicParsing="false" onAction="#finishCar" prefHeight="43.0" prefWidth="153.0" text="Create car" />
+      <Button layoutX="14.0" layoutY="536.0" mnemonicParsing="false" onAction="#toWheelsStepPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
     </AnchorPane>
     <Label fx:id="exceptionLabel" alignment="CENTER" layoutX="200.0" layoutY="549.0" maxHeight="50.0" prefWidth="400.0" text="" textAlignment="LEFT" textFill="RED">
       <font>

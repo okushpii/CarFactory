@@ -1,10 +1,12 @@
 package com.training.carfactory.controller.facade;
 
+import com.training.carfactory.controller.context.CarContext;
 import com.training.carfactory.model.entity.Body;
 import com.training.carfactory.model.entity.Car;
 import com.training.carfactory.model.entity.Engine;
 import com.training.carfactory.model.entity.Wheels;
 import com.training.carfactory.model.service.*;
+import com.training.carfactory.model.service.impl.util.Messages;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
@@ -19,14 +21,16 @@ public class ApplicationFacade {
     private BodyService bodyService;
     private EngineService engineService;
     private WheelsService wheelsService;
+    private CarContext carContext;
 
     public ApplicationFacade(PageService pageService, ElementService elementService, BodyService bodyService, EngineService engineService,
-                             WheelsService wheelsService) {
+                             WheelsService wheelsService, CarContext carContext) {
         this.pageService = pageService;
         this.elementService = elementService;
         this.bodyService = bodyService;
         this.engineService = engineService;
         this.wheelsService = wheelsService;
+        this.carContext = carContext;
     }
     public void initPartComboBoxes(Node initialPage, ListView<String> bodiesListView, ListView<String> enginesList, ListView<String> wheelsList, TableView<Car> carTableView){
         pageService.setCurrentPage(initialPage);
@@ -40,6 +44,41 @@ public class ApplicationFacade {
             String> engineColumn, TableColumn<Car, String> wheelsColumn){
 
         elementService.initCarTableElements(carTableView, carIdColumn, bodyColumn, engineColumn, wheelsColumn);
+    }
+
+    public void refreshBodyElements(ProgressBar bodyProgress, Button installBodyButton, Button removeBodyButton){
+        if (carContext.getCar() == null) {
+            bodyProgress.setProgress(0);
+            installBodyButton.setDisable(false);
+            removeBodyButton.setDisable(true);
+        }
+    }
+
+    public void refreshEngineElements(ProgressBar engineProgress, Button installEngineButton, Button removeEngineButton) {
+        if (carContext.getCar() == null) {
+            engineProgress.setProgress(0);
+            installEngineButton.setDisable(false);
+            removeEngineButton.setDisable(true);
+        }
+    }
+
+    public void refreshWheelsElements(ProgressBar wheelsProgress, Button installWheelsButton, Button removeWheelsButton) {
+        if (carContext.getCar() == null) {
+            wheelsProgress.setProgress(0);
+            installWheelsButton.setDisable(false);
+            removeWheelsButton.setDisable(true);
+        }
+    }
+
+    public void refreshCarElements(ProgressBar carProgress, Label bodyCarLabel, Label engineCarLabel,
+                                   Label wheelsCarLabel, Button finishCarButton) {
+        if (carContext.getCar() == null) {
+            carProgress.setProgress(0);
+            bodyCarLabel.setText(Messages.NOT_INSTALLED);
+            engineCarLabel.setText(Messages.NOT_INSTALLED);
+            wheelsCarLabel.setText(Messages.NOT_INSTALLED);
+            finishCarButton.setDisable(false);
+        }
     }
 
     public void toPage(Node nextNode){
