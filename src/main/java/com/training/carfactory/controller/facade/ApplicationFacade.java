@@ -32,11 +32,8 @@ public class ApplicationFacade {
         this.wheelsService = wheelsService;
         this.carContext = carContext;
     }
-    public void initPartComboBoxes(Node initialPage, ListView<String> bodiesListView, ListView<String> enginesList, ListView<String> wheelsList, TableView<Car> carTableView){
+    public void initPage(Node initialPage){
         pageService.setCurrentPage(initialPage);
-        elementService.initBodyElements(bodiesListView);
-        elementService.initEngineElements(enginesList);
-        elementService.initWheelsElements(wheelsList);
     }
 
     public void initCarTable(TableView<Car> carTableView, TableColumn<Car, Long> carIdColumn,
@@ -46,7 +43,8 @@ public class ApplicationFacade {
         elementService.initCarTableElements(carTableView, carIdColumn, bodyColumn, engineColumn, wheelsColumn);
     }
 
-    public void refreshBodyElements(ProgressBar bodyProgress, Button installBodyButton, Button removeBodyButton){
+    public void refreshBodyElements(ProgressBar bodyProgress, Button installBodyButton, Button removeBodyButton, ListView<String> bodiesListView){
+        elementService.initBodyElements(bodiesListView);
         if (carContext.getCar() == null) {
             bodyProgress.setProgress(0);
             installBodyButton.setDisable(false);
@@ -54,7 +52,8 @@ public class ApplicationFacade {
         }
     }
 
-    public void refreshEngineElements(ProgressBar engineProgress, Button installEngineButton, Button removeEngineButton) {
+    public void refreshEngineElements(ProgressBar engineProgress, Button installEngineButton, Button removeEngineButton, ListView<String> engineListView) {
+        elementService.initEngineElements(engineListView);
         if (carContext.getCar() == null) {
             engineProgress.setProgress(0);
             installEngineButton.setDisable(false);
@@ -62,7 +61,8 @@ public class ApplicationFacade {
         }
     }
 
-    public void refreshWheelsElements(ProgressBar wheelsProgress, Button installWheelsButton, Button removeWheelsButton) {
+    public void refreshWheelsElements(ProgressBar wheelsProgress, Button installWheelsButton, Button removeWheelsButton, ListView<String> wheelsListView) {
+        elementService.initWheelsElements(wheelsListView);
         if (carContext.getCar() == null) {
             wheelsProgress.setProgress(0);
             installWheelsButton.setDisable(false);

@@ -108,34 +108,50 @@ public class ApplicationController {
     private CarFacade carFacade;
 
     public void initialize() {
-        Platform.setImplicitExit(false);
         ApplicationContext.getInstance().initController(this);
-        initElements();
+        initPage();
+        toMenu();
     }
 
     public void toBodyStepPage() {
-        applicationFacade.refreshBodyElements(bodyProgress, installBodyButton, removeBodyButton);
-        switchToPage(bodyStep);
+        try {
+            switchToPage(bodyStep);
+            applicationFacade.refreshBodyElements(bodyProgress, installBodyButton, removeBodyButton, bodiesListView);
+        } catch (ConnectionFailedException ex) {
+            exceptionLabel.setText(Messages.CONNECTION_PROBLEM);
+        }
     }
 
     public void toEngineStepPage() {
-        applicationFacade.refreshEngineElements(engineProgress, installEngineButton, removeEngineButton);
-        switchToPage(engineStep);
+        try {
+            switchToPage(engineStep);
+            applicationFacade.refreshEngineElements(engineProgress, installEngineButton, removeEngineButton, engineListView);
+        } catch (ConnectionFailedException ex) {
+            exceptionLabel.setText(Messages.CONNECTION_PROBLEM);
+        }
     }
 
     public void toWheelsStepPage() {
-        applicationFacade.refreshWheelsElements(wheelsProgress, installWheelsButton, removeWheelsButton);
-        switchToPage(wheelsStep);
+        try {
+            switchToPage(wheelsStep);
+            applicationFacade.refreshWheelsElements(wheelsProgress, installWheelsButton, removeWheelsButton, wheelsListView);
+        } catch (ConnectionFailedException ex) {
+            exceptionLabel.setText(Messages.CONNECTION_PROBLEM);
+        }
     }
 
     public void toFinalStepPage(){
-        applicationFacade.refreshCarElements(carProgress, bodyCarLabel, engineCarLabel, wheelsCarLabel, finishCarButton);
         switchToPage(finalStep);
+        applicationFacade.refreshCarElements(carProgress, bodyCarLabel, engineCarLabel, wheelsCarLabel, finishCarButton);
     }
 
     public void toMenu() {
-        applicationFacade.initCarTable(carTableView, carIdColumn, bodyColumn, engineColumn, wheelsColumn);
-        switchToPage(menu);
+        try {
+            switchToPage(menu);
+            applicationFacade.initCarTable(carTableView, carIdColumn, bodyColumn, engineColumn, wheelsColumn);
+        } catch (ConnectionFailedException ex) {
+            exceptionLabel.setText(Messages.CONNECTION_PROBLEM);
+        }
     }
 
     public void installBody() {
@@ -189,6 +205,9 @@ public class ApplicationController {
     public void finishCar() {
         try {
             carFacade.finishCar(carProgress, finishCarButton);
+            removeBodyButton.setDisable(true);
+            removeEngineButton.setDisable(true);
+            removeWheelsButton.setDisable(true);
         } catch (PartIsMissingException ex) {
             exceptionLabel.setText(ex.getMessage());
         }
@@ -214,10 +233,9 @@ public class ApplicationController {
         applicationFacade.toPage(node);
     }
 
-    private void initElements() {
+    private void initPage() {
         try {
-            applicationFacade.initPartComboBoxes(menu, bodiesListView, engineListView, wheelsListView, carTableView);
-            applicationFacade.initCarTable(carTableView, carIdColumn, bodyColumn, engineColumn, wheelsColumn);
+            applicationFacade.initPage(menu);
         } catch (ConnectionFailedException ex) {
             exceptionLabel.setText(Messages.CONNECTION_PROBLEM);
         }
