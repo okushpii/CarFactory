@@ -9,7 +9,10 @@ import com.training.carfactory.model.service.*;
 import com.training.carfactory.model.service.impl.util.Messages;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -86,7 +89,7 @@ public class ApplicationFacade {
     }
 
     public void chooseBody(Pane bodyDetailsPane, Label bodyNameLabel,
-                           Label bodyTypeLabel, Label bodyPriceLabel, ListView<String> bodiesListView){
+                           Label bodyTypeLabel, Label bodyPriceLabel, ImageView bodyImage, ListView<String> bodiesListView){
         String selectedItem = bodiesListView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             bodyDetailsPane.setVisible(true);
@@ -94,11 +97,12 @@ public class ApplicationFacade {
             bodyNameLabel.setText(body.getName());
             bodyTypeLabel.setText(body.getType().toString());
             bodyPriceLabel.setText(new BigDecimal(body.getPrice()).toString());
+            bodyImage.setImage(new Image(getClass().getResourceAsStream(body.getImageUrl())));
         }
     }
 
     public void chooseEngine(Pane engineDetailsPane, Label engineNameLabel, Label engineVolumeLabel,
-                             Label enginePowerLabel, Label enginePriceLabel, ListView<String> enginesList){
+                             Label enginePowerLabel, Label enginePriceLabel, ImageView engineImage, ListView<String> enginesList){
         String selectedItem = enginesList.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             engineDetailsPane.setVisible(true);
@@ -107,10 +111,11 @@ public class ApplicationFacade {
             engineVolumeLabel.setText(engine.getVolume().toString());
             enginePowerLabel.setText(engine.getPower().toString());
             enginePriceLabel.setText(new BigDecimal(engine.getPrice()).toString());
+            engineImage.setImage(new Image(getClass().getResourceAsStream(engine.getImageUrl())));
         }
     }
     public void chooseWheels(Pane wheelsDetailsPane, Label wheelsNameLabel,
-                           Label wheelsSizeLabel, Label wheelsPriceLabel, ListView<String> wheelsList){
+                           Label wheelsSizeLabel, Label wheelsPriceLabel, ImageView wheelsImage, ListView<String> wheelsList){
         String selectedItem = wheelsList.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             wheelsDetailsPane.setVisible(true);
@@ -118,6 +123,7 @@ public class ApplicationFacade {
             wheelsNameLabel.setText(wheels.getName());
             wheelsSizeLabel.setText(wheels.getSize().toString());
             wheelsPriceLabel.setText(new BigDecimal(wheels.getPrice()).toString());
+            wheelsImage.setImage(new Image(getClass().getResourceAsStream(wheels.getImageUrl())));
         }
     }
 }

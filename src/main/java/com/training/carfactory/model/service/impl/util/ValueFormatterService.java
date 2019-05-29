@@ -12,8 +12,8 @@ public class ValueFormatterService {
 
     public String formatEngine(Engine engine){
         return engine.getName() + "," +
-                " " + engine.getVolume() + " m3," +
-                " " + engine.getPower() + " ktn";
+                " " + engine.getVolume() + " сm^3," +
+                " " + engine.getPower() + "kVt";
     }
 
     public String formatWheels(Wheels wheels){

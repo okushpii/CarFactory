@@ -11,8 +11,14 @@ import com.training.carfactory.model.service.impl.util.Messages;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+
+import java.awt.*;
 
 public class ApplicationController {
 
@@ -48,6 +54,8 @@ public class ApplicationController {
     @FXML
     private Label bodyPriceLabel;
     @FXML
+    private ImageView bodyImage;
+    @FXML
     private Button installBodyButton;
     @FXML
     private Button removeBodyButton;
@@ -67,6 +75,8 @@ public class ApplicationController {
     @FXML
     private Label enginePriceLabel;
     @FXML
+    private ImageView engineImage;
+    @FXML
     private Button installEngineButton;
     @FXML
     private Button removeEngineButton;
@@ -84,12 +94,13 @@ public class ApplicationController {
     @FXML
     private Label wheelsPriceLabel;
     @FXML
+    private ImageView wheelsImage;
+    @FXML
     private Button installWheelsButton;
     @FXML
     private Button removeWheelsButton;
     @FXML
     private ProgressBar wheelsProgress;
-
     @FXML
     private Label bodyCarLabel;
     @FXML
@@ -100,7 +111,6 @@ public class ApplicationController {
     private ProgressBar carProgress;
     @FXML
     private Button finishCarButton;
-
     @FXML
     private Label exceptionLabel;
 
@@ -144,6 +154,8 @@ public class ApplicationController {
         switchToPage(finalStep);
         applicationFacade.refreshCarElements(carProgress, bodyCarLabel, engineCarLabel, wheelsCarLabel, finishCarButton);
     }
+
+    public void exit(){ System.exit(0); }
 
     public void toMenu() {
         try {
@@ -216,16 +228,16 @@ public class ApplicationController {
     public void selectBody() {
         exceptionLabel.setText("");
         applicationFacade.chooseBody(bodyDetailsPane, bodyNameLabel,
-                bodyTypeLabel, bodyPriceLabel, bodiesListView);
+                bodyTypeLabel, bodyPriceLabel, bodyImage, bodiesListView);
     }
 
     public void selectEngine() {
         applicationFacade.chooseEngine(engineDetailsPane, engineNameLabel,
-                engineVolumeLabel, enginePowerLabel, enginePriceLabel, engineListView);
+                engineVolumeLabel, enginePowerLabel, enginePriceLabel, engineImage, engineListView);
     }
 
     public void selectWheels() {
-        applicationFacade.chooseWheels(wheelsDetailsPane, wheelsNameLabel, wheelsSizeLabel, wheelsPriceLabel, wheelsListView);
+        applicationFacade.chooseWheels(wheelsDetailsPane, wheelsNameLabel, wheelsSizeLabel, wheelsPriceLabel, wheelsImage, wheelsListView);
     }
 
     private void switchToPage(AnchorPane node) {

@@ -32,6 +32,7 @@ public class DefaultEngineDao implements EngineDao {
                 engine.setPower(rs.getLong(3));
                 engine.setPrice(rs.getLong(4));
                 engine.setVolume(rs.getLong(5));
+                engine.setImageUrl(rs.getString(6));
                 engines.add(engine);
             }
         } catch (SQLException e) {
@@ -53,6 +54,7 @@ public class DefaultEngineDao implements EngineDao {
                engine.setVolume(rs.getLong(3));
                engine.setPower(rs.getLong(4));
                engine.setPrice(rs.getLong(5));
+               engine.setImageUrl(rs.getString(6));
                return engine;
            }
        } catch (SQLException e) {

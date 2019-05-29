@@ -6,6 +6,7 @@ public class Body implements Part{
     private String name;
     private Type type;
     private Long price;
+    private String imageUrl;
 
     public enum Type{
         SEDAN,
@@ -13,11 +14,12 @@ public class Body implements Part{
         COUPE
     }
 
-    public Body(Long id, String name, Type type, Long price) {
+    public Body(Long id, String name, Type type, Long price, String imageUrl) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.price = price;
+        this.imageUrl = imageUrl;
     }
 
     public Body(){
@@ -53,5 +55,13 @@ public class Body implements Part{
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
