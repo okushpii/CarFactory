@@ -29,8 +29,9 @@ public class DefaultWheelsDao implements WheelsDao {
                 Wheels wheels = new Wheels();
                 wheels.setId(rs.getLong(1));
                 wheels.setName(rs.getString(2));
-                wheels.setSize(rs.getLong(3));
+                wheels.setSize(rs.getString(3));
                 wheels.setPrice(rs.getLong(4));
+                wheels.setImageUrl(rs.getString(5));
                 wheelsList.add(wheels);
             }
         } catch (SQLException e) {
@@ -49,8 +50,9 @@ public class DefaultWheelsDao implements WheelsDao {
                 Wheels wheels = new Wheels();
                 wheels.setId(rs.getLong(1));
                 wheels.setName(rs.getString(2));
-                wheels.setSize(rs.getLong(3));
+                wheels.setSize(rs.getString(3));
                 wheels.setPrice(rs.getLong(4));
+                wheels.setImageUrl(rs.getString(5));
                 return wheels;
             }
         } catch (SQLException e) {

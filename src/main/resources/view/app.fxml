@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.training.carfactory.controller.ApplicationController">
+<AnchorPane prefHeight="780.0" prefWidth="942.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.training.carfactory.controller.ApplicationController">
   <children>
-    <AnchorPane fx:id="menu" prefHeight="600.0" prefWidth="800.0" visible="true">
+    <AnchorPane fx:id="menu" layoutX="0.0" layoutY="0.0" prefHeight="780.0" prefWidth="942.0" visible="true">
       <children>
-        <TableView fx:id="carTableView" layoutX="50.0" layoutY="88.0" prefHeight="425.0" prefWidth="700.0">
+        <TableView fx:id="carTableView" layoutX="28.0" layoutY="88.0" prefHeight="601.0" prefWidth="886.0">
           <columns>
             <TableColumn prefWidth="98.0" text="Id" fx:id="carIdColumn" />
             <TableColumn prefWidth="200.0" text="Body" fx:id="bodyColumn" />
@@ -18,25 +18,25 @@
             <TableColumn prefWidth="200.0" text="Wheels" fx:id="wheelsColumn" />
           </columns>
         </TableView>
-        <Button layoutX="636.0" layoutY="536.0" mnemonicParsing="false" onAction="#toBodyStepPage" prefHeight="50.0" prefWidth="150.0" text="Create car" />
-        <Button layoutX="14.0" layoutY="536.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Exit" />
-        <Label layoutX="299.0" layoutY="14.0" text="Car factory">
+        <Button layoutX="778.0" layoutY="716.0" mnemonicParsing="false" onAction="#toBodyStepPage" prefHeight="50.0" prefWidth="150.0" text="Create car" />
+        <Button layoutX="14.0" layoutY="716.0" mnemonicParsing="false" onAction="#exit" prefHeight="50.0" prefWidth="150.0" text="Exit" />
+        <Label layoutX="370.0" layoutY="14.0" text="Car factory">
           <font>
             <Font size="42.0" />
           </font>
         </Label>
       </children>
     </AnchorPane>
-    <AnchorPane fx:id="bodyStep" prefHeight="600.0" prefWidth="800.0" visible="false">
+    <AnchorPane fx:id="bodyStep" layoutX="0.0" layoutY="0.0" prefHeight="780.0" prefWidth="942.0" visible="false">
       <children>
-        <Button layoutX="636.0" layoutY="536.0" mnemonicParsing="false" onAction="#toEngineStepPage" prefHeight="50.0" prefWidth="150.0" text="Next step" />
-        <Button layoutX="14.0" layoutY="536.0" mnemonicParsing="false" onAction="#toMenu" prefHeight="50.0" prefWidth="150.0" text="Back" />
-        <Label layoutX="294.0" layoutY="22.0" text="Choose a body">
+        <Button layoutX="778.0" layoutY="716.0" mnemonicParsing="false" onAction="#toEngineStepPage" prefHeight="50.0" prefWidth="150.0" text="Next step" />
+        <Button layoutX="14.0" layoutY="716.0" mnemonicParsing="false" onAction="#toMenu" prefHeight="50.0" prefWidth="150.0" text="Back" />
+        <Label layoutX="370.0" layoutY="14.0" text="Choose a body">
           <font>
             <Font size="32.0" fx:id="x1" />
           </font>
         </Label>
-        <Pane fx:id="bodyDetailsPane" layoutX="379.0" layoutY="90.0" prefHeight="250.0" prefWidth="340.0" visible="false">
+        <Pane fx:id="bodyDetailsPane" layoutX="334.0" layoutY="92.0" prefHeight="537.0" prefWidth="594.0" visible="false">
           <Label layoutX="99.0" layoutY="6.0" text="Body details">
             <font>
               <Font name="System Bold" size="24.0" fx:id="x3" />
@@ -56,20 +56,21 @@
               <Label fx:id="bodyPriceLabel" font="$x2" layoutX="200.0" layoutY="110.0" />
             </children>
           </Pane>
+          <ImageView fx:id="bodyImage" fitHeight="312.77845098284314" fitWidth="415.28564453125" layoutX="79.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
-        <ListView fx:id="bodiesListView" layoutX="44.0" layoutY="100.0" onMouseClicked="#selectBody" prefHeight="400.0" prefWidth="270.0" />
-        <ProgressBar fx:id="bodyProgress" layoutX="378.0" layoutY="470.0" prefHeight="30.0" prefWidth="340.0" progress="0.0" />
-        <Button fx:id="installBodyButton" cancelButton="false" defaultButton="false" layoutX="379.0" layoutY="440.0" mnemonicParsing="false" onAction="#installBody" prefHeight="30.0" prefWidth="80.0" text="Install" textOverrun="ELLIPSIS" />
-        <Button fx:id="removeBodyButton" cancelButton="false" defaultButton="false" disable="true" layoutX="459.0" layoutY="440.0" mnemonicParsing="false" onAction="#removeBody" prefHeight="30.0" prefWidth="80.0" text="Remove" textOverrun="ELLIPSIS" />
+        <ListView fx:id="bodiesListView" layoutX="44.0" layoutY="100.0" onMouseClicked="#selectBody" prefHeight="550.0" prefWidth="270.0" />
+        <ProgressBar fx:id="bodyProgress" layoutX="588.0" layoutY="672.0" prefHeight="30.0" prefWidth="340.0" progress="0.0" />
+        <Button fx:id="installBodyButton" cancelButton="false" defaultButton="false" layoutX="588.0" layoutY="642.0" mnemonicParsing="false" onAction="#installBody" prefHeight="30.0" prefWidth="80.0" text="Install" textOverrun="ELLIPSIS" />
+        <Button fx:id="removeBodyButton" cancelButton="false" defaultButton="false" disable="true" layoutX="669.0" layoutY="642.0" mnemonicParsing="false" onAction="#removeBody" prefHeight="30.0" prefWidth="80.0" text="Remove" textOverrun="ELLIPSIS" />
       </children>
     </AnchorPane>
-    <AnchorPane fx:id="engineStep" prefHeight="600.0" prefWidth="800.0" visible="false">
-      <Button layoutX="636.0" layoutY="532.0" mnemonicParsing="false" onAction="#toWheelsStepPage" prefHeight="50.0" prefWidth="150.0" text="Next step" />
-      <Button layoutX="14.0" layoutY="532.0" mnemonicParsing="false" onAction="#toBodyStepPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
+    <AnchorPane fx:id="engineStep" layoutX="0.0" layoutY="0.0" prefHeight="780.0" prefWidth="942.0" visible="false">
+      <Button layoutX="778.0" layoutY="716.0" mnemonicParsing="false" onAction="#toWheelsStepPage" prefHeight="50.0" prefWidth="150.0" text="Next step" />
+      <Button layoutX="14.0" layoutY="716.0" mnemonicParsing="false" onAction="#toBodyStepPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
       <Label font="$x1" layoutX="273.0" layoutY="18.0" text="Choose an engine" />
-      <Pane id="bodyDetailsPane" fx:id="engineDetailsPane" layoutX="379.0" layoutY="86.0" prefHeight="250.0" prefWidth="340.0" visible="true">
+      <Pane id="bodyDetailsPane" fx:id="engineDetailsPane" layoutX="324.0" layoutY="78.0" prefHeight="537.0" prefWidth="594.0" visible="false">
         <Label font="$x3" layoutX="99.0" layoutY="6.0" text="Engine details" />
-        <Pane id="bodyDetailsText" layoutX="-1.0" layoutY="64.0" prefHeight="186.0" prefWidth="340.0">
+        <Pane id="bodyDetailsText" layoutX="-1.0" layoutY="64.0" prefHeight="186.0" prefWidth="339.9999000000025">
           <children>
             <Label font="$x2" layoutX="50.0" layoutY="10.0" text="Name" />
             <Label font="$x2" layoutX="50.0" layoutY="60.0" text="Volume" />
@@ -81,35 +82,37 @@
             <Label id="bodyPriceLabel" fx:id="enginePriceLabel" font="$x2" layoutX="200.0" layoutY="156.0" />
           </children>
         </Pane>
+        <ImageView fx:id="engineImage" fitHeight="256.7784423828125" fitWidth="340.9327066606574" layoutX="110.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true" />
       </Pane>
-      <ListView fx:id="engineListView" layoutX="44.0" layoutY="96.0" onMouseClicked="#selectEngine" prefHeight="400.0" prefWidth="270.0" />
-      <ProgressBar fx:id="engineProgress" layoutX="378.0" layoutY="466.0" prefHeight="30.0" prefWidth="340.0" progress="0.0" />
-      <Button fx:id="installEngineButton" cancelButton="false" defaultButton="false" layoutX="379.0" layoutY="436.0" mnemonicParsing="false" onAction="#installEngine" prefHeight="30.0" prefWidth="80.0" text="Install" textOverrun="ELLIPSIS" />
-      <Button fx:id="removeEngineButton" cancelButton="false" defaultButton="false" disable="true" layoutX="459.0" layoutY="436.0" mnemonicParsing="false" onAction="#removeEngine" prefHeight="30.0" prefWidth="80.0" text="Remove" textOverrun="ELLIPSIS" />
+      <ListView fx:id="engineListView" layoutX="44.0" layoutY="96.0" onMouseClicked="#selectEngine" prefHeight="550.0" prefWidth="270.0" />
+      <ProgressBar fx:id="engineProgress" layoutX="588.0" layoutY="672.0" prefHeight="30.0" prefWidth="340.0" progress="0.0" />
+      <Button fx:id="installEngineButton" cancelButton="false" defaultButton="false" layoutX="588.0" layoutY="642.0" mnemonicParsing="false" onAction="#installEngine" prefHeight="30.0" prefWidth="80.0" text="Install" textOverrun="ELLIPSIS" />
+      <Button fx:id="removeEngineButton" cancelButton="false" defaultButton="false" disable="true" layoutX="669.0" layoutY="642.0" mnemonicParsing="false" onAction="#removeEngine" prefHeight="30.0" prefWidth="80.0" text="Remove" textOverrun="ELLIPSIS" />
     </AnchorPane>
-    <AnchorPane fx:id="wheelsStep" prefHeight="600.0" prefWidth="800.0" visible="false">
-      <Button id="finish" layoutX="636.0" layoutY="536.0" mnemonicParsing="false" onAction="#toFinalStepPage" prefHeight="50.0" prefWidth="150.0" text="Finish" />
-      <Button layoutX="14.0" layoutY="536.0" mnemonicParsing="false" onAction="#toEngineStepPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
-      <Label font="$x1" layoutX="297.0" layoutY="22.0" text="Choose a wheels" />
-      <Pane id="bodyDetailsPane" fx:id="wheelsDetailsPane" layoutX="379.0" layoutY="90.0" prefHeight="250.0" prefWidth="340.0" visible="true">
+    <AnchorPane fx:id="wheelsStep" layoutX="0.0" layoutY="0.0" prefHeight="780.0" prefWidth="942.0" visible="false">
+      <Button id="finish" layoutX="778.0" layoutY="716.0" mnemonicParsing="false" onAction="#toFinalStepPage" prefHeight="50.0" prefWidth="150.0" text="Finish" />
+      <Button layoutX="14.0" layoutY="716.0" mnemonicParsing="false" onAction="#toEngineStepPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
+      <Label font="$x1" layoutX="370.0" layoutY="14.0" text="Choose a wheels" />
+      <Pane id="bodyDetailsPane" fx:id="wheelsDetailsPane" layoutX="333.0" layoutY="92.0" prefHeight="537.0" prefWidth="594.0" visible="false">
         <Label font="$x3" layoutX="99.0" layoutY="6.0" text="Wheels details" />
+        <ImageView fx:id="wheelsImage" fitHeight="312.77845098284314" fitWidth="415.28564453125" layoutX="79.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true" />
         <Pane id="bodyDetailsText" layoutX="-1.0" layoutY="64.0" prefHeight="150.0" prefWidth="340.0">
           <children>
             <Label font="$x2" layoutX="50.0" layoutY="10.0" text="Name" />
             <Label font="$x2" layoutX="50.0" layoutY="60.0" text="Size" />
             <Label font="$x2" layoutX="50.0" layoutY="110.0" text="Price" />
-            <Label id="bodyNameLabel" fx:id="wheelsNameLabel" font="$x2" layoutX="200.0" layoutY="10.0" />
-            <Label id="bodyTypeLabel" fx:id="wheelsSizeLabel" font="$x2" layoutX="200.0" layoutY="60.0" />
-            <Label id="bodyPriceLabel" fx:id="wheelsPriceLabel" font="$x2" layoutX="200.0" layoutY="110.0" />
+            <Label fx:id="wheelsNameLabel" font="$x2" layoutX="200.0" layoutY="10.0" />
+            <Label fx:id="wheelsSizeLabel" font="$x2" layoutX="200.0" layoutY="60.0" />
+            <Label fx:id="wheelsPriceLabel" font="$x2" layoutX="200.0" layoutY="110.0" />
           </children>
         </Pane>
       </Pane>
       <ListView fx:id="wheelsListView" layoutX="44.0" layoutY="100.0" onMouseClicked="#selectWheels" prefHeight="400.0" prefWidth="270.0" />
-      <ProgressBar fx:id="wheelsProgress" layoutX="378.0" layoutY="470.0" prefHeight="30.0" prefWidth="340.0" progress="0.0" />
-      <Button fx:id="installWheelsButton" cancelButton="false" defaultButton="false" layoutX="379.0" layoutY="440.0" mnemonicParsing="false" onAction="#installWheels" prefHeight="30.0" prefWidth="80.0" text="Install" textOverrun="ELLIPSIS" />
-      <Button fx:id="removeWheelsButton" cancelButton="false" defaultButton="false" disable="true" layoutX="459.0" layoutY="440.0" mnemonicParsing="false" onAction="#removeWheels" prefHeight="30.0" prefWidth="80.0" text="Remove" textOverrun="ELLIPSIS" />
+      <ProgressBar fx:id="wheelsProgress" layoutX="588.0" layoutY="672.0" prefHeight="30.0" prefWidth="340.0" progress="0.0" />
+      <Button fx:id="installWheelsButton" cancelButton="false" defaultButton="false" layoutX="588.0" layoutY="642.0" mnemonicParsing="false" onAction="#installWheels" prefHeight="30.0" prefWidth="80.0" text="Install" textOverrun="ELLIPSIS" />
+      <Button fx:id="removeWheelsButton" cancelButton="false" defaultButton="false" disable="true" layoutX="669.0" layoutY="642.0" mnemonicParsing="false" onAction="#removeWheels" prefHeight="30.0" prefWidth="80.0" text="Remove" textOverrun="ELLIPSIS" />
     </AnchorPane>
-    <AnchorPane fx:id="finalStep" layoutX="0.0" layoutY="0.0" prefHeight="600.0" prefWidth="800.0" visible="false">
+    <AnchorPane fx:id="finalStep" layoutX="0.0" layoutY="0.0" prefHeight="780.0" prefWidth="942.0" visible="false">
       <Label font="$x1" layoutX="333.0" layoutY="28.0" text="Final step" />
       <Label layoutX="83.0" layoutY="86.0" text="Body:">
         <font>
@@ -123,7 +126,8 @@
       <Label fx:id="wheelsCarLabel" font="$x4" layoutX="333.0" layoutY="222.0" text="Part is not installed" />
       <ProgressBar fx:id="carProgress" layoutX="152.0" layoutY="371.0" prefHeight="43.0" prefWidth="491.0" progress="0.0" />
       <Button fx:id="finishCarButton" layoutX="315.0" layoutY="428.0" mnemonicParsing="false" onAction="#finishCar" prefHeight="43.0" prefWidth="153.0" text="Create car" />
-      <Button layoutX="14.0" layoutY="536.0" mnemonicParsing="false" onAction="#toWheelsStepPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
+      <Button layoutX="14.0" layoutY="716.0" mnemonicParsing="false" onAction="#toWheelsStepPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
+      <Button layoutX="778.0" layoutY="716.0" mnemonicParsing="false" onAction="#toMenu" prefHeight="50.0" prefWidth="150.0" text="Main page" />
     </AnchorPane>
     <Label fx:id="exceptionLabel" alignment="CENTER" layoutX="200.0" layoutY="549.0" maxHeight="50.0" prefWidth="400.0" text="" textAlignment="LEFT" textFill="RED">
       <font>

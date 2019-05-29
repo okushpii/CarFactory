@@ -44,7 +44,7 @@ public class DefaultCarDao implements CarDao {
                 engine.setPower(rs.getLong("e.power"));
                 Wheels wheels = new Wheels();
                 wheels.setName(rs.getString("w.name"));
-                wheels.setSize(rs.getLong("w.size"));
+                wheels.setSize(rs.getString("w.size"));
                 car.setBody(body);
                 car.setEngine(engine);
                 car.setWheels(wheels);

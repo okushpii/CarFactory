@@ -4,14 +4,16 @@ public class Wheels implements Part{
 
     private Long id;
     private String name;
-    private Long size;
+    private String size;
     private Long price;
+    private String imageUrl;
 
-    public Wheels(Long id, String name, Long size, Long price) {
+    public Wheels(Long id, String name, String size, Long price, String imageUrl) {
         this.id = id;
         this.name = name;
         this.size = size;
         this.price = price;
+        this.imageUrl = imageUrl;
     }
 
     public Wheels() {
@@ -33,11 +35,11 @@ public class Wheels implements Part{
         this.name = name;
     }
 
-    public Long getSize() {
+    public String getSize() {
         return size;
     }
 
-    public void setSize(Long size) {
+    public void setSize(String size) {
         this.size = size;
     }
 
@@ -47,5 +49,13 @@ public class Wheels implements Part{
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

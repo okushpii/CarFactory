@@ -7,13 +7,15 @@ public class Engine implements Part{
     private Long volume;
     private Long power;
     private Long price;
+    private String imageUrl;
 
-    public Engine(Long id, String name, Long volume, Long power, Long price) {
+    public Engine(Long id, String name, Long volume, Long power, Long price, String imageUrl) {
         this.id = id;
         this.name = name;
         this.volume = volume;
         this.power = power;
         this.price = price;
+        this.imageUrl = imageUrl;
     }
 
     public Engine() {
@@ -57,5 +59,13 @@ public class Engine implements Part{
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
