@@ -6,6 +6,7 @@ public class Car {
     private Body body;
     private Engine engine;
     private Wheels wheels;
+    private Salon salon;
     private String customer;
     private Status status;
     private Long price;
@@ -20,11 +21,12 @@ public class Car {
         DONE
     }
 
-    public Car(Long id, Body body, Engine engine, Wheels wheels, String customer, Status status, Long price) {
+    public Car(Long id, Body body, Engine engine, Wheels wheels, Salon salon, String customer, Status status, Long price) {
         this.id = id;
         this.body = body;
         this.engine = engine;
         this.wheels = wheels;
+        this.salon = salon;
         this.customer = customer;
         this.status = status;
         this.price = price;
@@ -60,6 +62,14 @@ public class Car {
 
     public void setWheels(Wheels wheels) {
         this.wheels = wheels;
+    }
+
+    public Salon getSalon() {
+        return salon;
+    }
+
+    public void setSalon(Salon salon) {
+        this.salon = salon;
     }
 
     public String getCustomer() {

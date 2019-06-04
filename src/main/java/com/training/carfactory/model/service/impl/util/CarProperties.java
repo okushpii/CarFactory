@@ -10,5 +10,7 @@ public interface CarProperties {
     Integer ENGINE_RESEMBLE_DELAY = 30;
     Integer WHEELS_ASSEMBLE_DELAY = 7;
     Integer WHEELS_RESEMBLE_DELAY = 40;
+    Integer SALON_ASSEMBLE_DELAY = 7;
+    Integer SALON_RESEMBLE_DELAY = 30;
     Integer CAR_ASSEMBLE_DELAY = 90;
 }

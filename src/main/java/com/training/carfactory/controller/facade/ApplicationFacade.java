@@ -1,10 +1,7 @@
 package com.training.carfactory.controller.facade;
 
 import com.training.carfactory.controller.context.CarContext;
-import com.training.carfactory.model.entity.Body;
-import com.training.carfactory.model.entity.Car;
-import com.training.carfactory.model.entity.Engine;
-import com.training.carfactory.model.entity.Wheels;
+import com.training.carfactory.model.entity.*;
 import com.training.carfactory.model.service.*;
 import com.training.carfactory.model.service.impl.util.Messages;
 import javafx.scene.Node;
@@ -15,7 +12,7 @@ import javafx.scene.layout.Pane;
 
 
 import java.math.BigDecimal;
-import java.util.Optional;
+
 
 public class ApplicationFacade {
 
@@ -24,15 +21,17 @@ public class ApplicationFacade {
     private BodyService bodyService;
     private EngineService engineService;
     private WheelsService wheelsService;
+    private SalonService salonService;
     private CarContext carContext;
 
     public ApplicationFacade(PageService pageService, ElementService elementService, BodyService bodyService, EngineService engineService,
-                             WheelsService wheelsService, CarContext carContext) {
+                             WheelsService wheelsService, SalonService salonService, CarContext carContext) {
         this.pageService = pageService;
         this.elementService = elementService;
         this.bodyService = bodyService;
         this.engineService = engineService;
         this.wheelsService = wheelsService;
+        this.salonService = salonService;
         this.carContext = carContext;
     }
     public void initPage(Node initialPage){
@@ -41,9 +40,9 @@ public class ApplicationFacade {
 
     public void initCarTable(TableView<Car> carTableView, TableColumn<Car, Long> carIdColumn,
                              TableColumn<Car, String> bodyColumn, TableColumn<Car,
-            String> engineColumn, TableColumn<Car, String> wheelsColumn){
+            String> engineColumn, TableColumn<Car, String> wheelsColumn, TableColumn<Car, String> salonColumn){
 
-        elementService.initCarTableElements(carTableView, carIdColumn, bodyColumn, engineColumn, wheelsColumn);
+        elementService.initCarTableElements(carTableView, carIdColumn, bodyColumn, engineColumn, wheelsColumn, salonColumn);
     }
 
     public void refreshBodyElements(ProgressBar bodyProgress, Button installBodyButton, Button removeBodyButton, ListView<String> bodiesListView){
@@ -70,6 +69,15 @@ public class ApplicationFacade {
             wheelsProgress.setProgress(0);
             installWheelsButton.setDisable(false);
             removeWheelsButton.setDisable(true);
+        }
+    }
+
+    public void refreshSalonElements(ProgressBar salonProgress, Button installSalonButton, Button removeSalonButton, ListView<String> salonListView){
+        elementService.initSalonElements(salonListView);
+        if(carContext.getCar() == null){
+            salonProgress.setProgress(0);
+            installSalonButton.setDisable(false);
+            removeSalonButton.setDisable(true);
         }
     }
 
@@ -115,7 +123,7 @@ public class ApplicationFacade {
         }
     }
     public void chooseWheels(Pane wheelsDetailsPane, Label wheelsNameLabel,
-                           Label wheelsSizeLabel, Label wheelsPriceLabel, ImageView wheelsImage, ListView<String> wheelsList){
+                              Label wheelsSizeLabel, Label wheelsPriceLabel, ImageView wheelsImage, ListView<String> wheelsList){
         String selectedItem = wheelsList.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             wheelsDetailsPane.setVisible(true);
@@ -126,4 +134,17 @@ public class ApplicationFacade {
             wheelsImage.setImage(new Image(getClass().getResourceAsStream(wheels.getImageUrl())));
         }
     }
+
+    public void chooseSalon(Pane salonDetailsPane, Label salonNameLabel,
+                            Label salonPriceLabel, ImageView salonImage, ListView<String> salonList){
+        String selectedItem = salonList.getSelectionModel().getSelectedItem();
+        if (selectedItem != null){
+            salonDetailsPane.setVisible(true);
+            Salon salon = salonService.getByName(selectedItem);
+            salonNameLabel.setText(salon.getName());
+            salonPriceLabel.setText(new BigDecimal(salon.getPrice()).toString());
+            salonImage.setImage(new Image(getClass().getResourceAsStream(salon.getImageUrl())));
+        }
+    }
+
 }

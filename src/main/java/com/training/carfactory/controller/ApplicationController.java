@@ -32,6 +32,8 @@ public class ApplicationController {
     @FXML
     private AnchorPane wheelsStep;
     @FXML
+    private AnchorPane salonStep;
+    @FXML
     private AnchorPane finalStep;
     @FXML
     private TableView<Car> carTableView;
@@ -43,7 +45,8 @@ public class ApplicationController {
     private TableColumn<Car, String> engineColumn;
     @FXML
     private TableColumn<Car, String> wheelsColumn;
-
+    @FXML
+    private TableColumn<Car, String> salonColumn;
     @FXML
     private ListView<String> bodiesListView;
     @FXML
@@ -62,7 +65,6 @@ public class ApplicationController {
     private Button removeBodyButton;
     @FXML
     private ProgressBar bodyProgress;
-
     @FXML
     private ListView<String> engineListView;
     @FXML
@@ -103,11 +105,29 @@ public class ApplicationController {
     @FXML
     private ProgressBar wheelsProgress;
     @FXML
+    private ListView<String> salonListView;
+    @FXML
+    private Pane salonDetailsPane;
+    @FXML
+    private Label salonNameLabel;
+    @FXML
+    private Label salonPriceLabel;
+    @FXML
+    private ImageView salonImage;
+    @FXML
+    private Button installSalonButton;
+    @FXML
+    private Button removeSalonButton;
+    @FXML
+    private ProgressBar salonProgress;
+    @FXML
     private Label bodyCarLabel;
     @FXML
     private Label engineCarLabel;
     @FXML
     private Label wheelsCarLabel;
+    @FXML
+    private Label salonCarLabel;
     @FXML
     private ProgressBar carProgress;
     @FXML
@@ -151,6 +171,15 @@ public class ApplicationController {
         }
     }
 
+    public void toSalonStepPage(){
+        try {
+            switchToPage(salonStep);
+            applicationFacade.refreshSalonElements(salonProgress, installSalonButton, removeSalonButton, salonListView);
+        }catch (ConnectionFailedException ex){
+            exceptionLabel.setText(Messages.CONNECTION_PROBLEM);
+        }
+    }
+
     public void toFinalStepPage(){
         switchToPage(finalStep);
         applicationFacade.refreshCarElements(carProgress, bodyCarLabel, engineCarLabel, wheelsCarLabel, finishCarButton);
@@ -161,7 +190,7 @@ public class ApplicationController {
     public void toMenu() {
         try {
             switchToPage(menu);
-            applicationFacade.initCarTable(carTableView, carIdColumn, bodyColumn, engineColumn, wheelsColumn);
+            applicationFacade.initCarTable(carTableView, carIdColumn, bodyColumn, engineColumn, wheelsColumn, salonColumn);
         } catch (ConnectionFailedException ex) {
             exceptionLabel.setText(Messages.CONNECTION_PROBLEM);
         }
@@ -215,12 +244,29 @@ public class ApplicationController {
         }
     }
 
+    public void installSalon() {
+        try {
+            carFacade.buildSalon(salonListView, salonProgress, installSalonButton, salonCarLabel, removeSalonButton);
+        } catch (PartIsMissingException | IncorrectResembleOrderException ex) {
+            exceptionLabel.setText(ex.getMessage());
+        }
+    }
+
+    public void removeSalon() {
+        try {
+            carFacade.removeSalon(salonProgress, installSalonButton, salonCarLabel, removeSalonButton);
+        } catch (IncorrectResembleOrderException ex) {
+            exceptionLabel.setText(ex.getMessage());
+        }
+    }
+
     public void finishCar() {
         try {
             carFacade.finishCar(carProgress, finishCarButton);
             removeBodyButton.setDisable(true);
             removeEngineButton.setDisable(true);
             removeWheelsButton.setDisable(true);
+            removeSalonButton.setDisable(true);
         } catch (PartIsMissingException ex) {
             exceptionLabel.setText(ex.getMessage());
         }
@@ -239,6 +285,10 @@ public class ApplicationController {
 
     public void selectWheels() {
         applicationFacade.chooseWheels(wheelsDetailsPane, wheelsNameLabel, wheelsSizeLabel, wheelsPriceLabel, wheelsImage, wheelsListView);
+    }
+
+    public void selectSalon() {
+        applicationFacade.chooseSalon(salonDetailsPane, salonNameLabel, salonPriceLabel, salonImage, salonListView);
     }
 
     private void switchToPage(AnchorPane node) {
