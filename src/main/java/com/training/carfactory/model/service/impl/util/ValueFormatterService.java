@@ -2,6 +2,7 @@ package com.training.carfactory.model.service.impl.util;
 
 import com.training.carfactory.model.entity.Body;
 import com.training.carfactory.model.entity.Engine;
+import com.training.carfactory.model.entity.Salon;
 import com.training.carfactory.model.entity.Wheels;
 
 public class ValueFormatterService {
@@ -19,4 +20,6 @@ public class ValueFormatterService {
     public String formatWheels(Wheels wheels){
         return wheels.getName() + ", " + wheels.getSize() + " inches";
     }
+
+    public String formatSalon(Salon salon){ return salon.getName();}
 }

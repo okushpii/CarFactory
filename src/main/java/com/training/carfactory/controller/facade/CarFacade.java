@@ -38,6 +38,7 @@ public class CarFacade {
     public void removeBody(ProgressBar bodyProgress, Button installBodyButton, Label carBodyLabel, Button removeBodyButton) {
         partVerifier.verifyPartAbsent(carContext.getCar().getWheels(), Messages.WHEELS_SHOULD_BE_REMOVED_FIRST);
         partVerifier.verifyPartAbsent(carContext.getCar().getEngine(), Messages.ENGINE_SHOULD_BE_REMOVED_FIRST);
+        partVerifier.verifyPartAbsent(carContext.getCar().getSalon(), Messages.SALON_SHOULD_BE_REMOVED_FIRST);
         carProgressService.removeBody(bodyProgress, installBodyButton, carBodyLabel, removeBodyButton);
     }
 
@@ -73,9 +74,25 @@ public class CarFacade {
         carProgressService.removeWheels(wheelsProgress, installWheelsButton, carWheelsLabel, removeWheelsButton);
     }
 
+    public void buildSalon(ListView<String> wheels, ProgressBar salonProgressBar,
+                            Button installButton, Label carSalonLabel, Button removeButton){
+        checkIfCarPresent();
+        String selectedItem = wheels.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            partVerifier.verifyPartPresent(carContext.getCar().getBody(), Messages.BODY_WAS_NOT_INSTALLED);
+            carProgressService.installSalon(salonProgressBar, selectedItem, carSalonLabel, installButton, removeButton);
+        } else {
+            throw new PartIsMissingException(Messages.SALON_IS_NOT_CHOSEN);
+        }
+    }
+
+    public void removeSalon(ProgressBar salonProgress, Button installSalonButton, Label carSalonLabel, Button removeSalonButton) {
+        carProgressService.removeSalon(salonProgress, installSalonButton, carSalonLabel, removeSalonButton);
+    }
+
     public void finishCar(ProgressBar carProgress, Button finishCarButton) {
         checkIfCarPresent();
-        partVerifier.verifyPartsPresent(carContext.getCar().getBody(), carContext.getCar().getEngine(), carContext.getCar().getWheels());
+        partVerifier.verifyPartsPresent(carContext.getCar().getBody(), carContext.getCar().getEngine(), carContext.getCar().getWheels(), carContext.getCar().getSalon());
         carProgressService.buildCar(carProgress, finishCarButton);
     }
 

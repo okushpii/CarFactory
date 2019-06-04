@@ -13,7 +13,9 @@ public interface ElementService {
 
     void initWheelsElements(ListView<String> wheelsList);
 
+    void initSalonElements(ListView<String> salonList);
+
     void initCarTableElements(TableView<Car> carTableView, TableColumn<Car, Long> carIdColumn,
                               TableColumn<Car, String> bodyColumn, TableColumn<Car,
-            String> engineColumn, TableColumn<Car, String> wheelsColumn);
+            String> engineColumn, TableColumn<Car, String> wheelsColumn, TableColumn<Car, String> salonColumn);
 }

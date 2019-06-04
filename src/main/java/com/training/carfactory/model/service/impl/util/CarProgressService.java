@@ -85,6 +85,23 @@ public class CarProgressService {
         carPropertyUpdater.updateAfterWheelsRemove(installButton, carWheelsLabel, cdl);
     }
 
+    public void installSalon(ProgressBar salonProgressBar, String selectedSalon, Label carSalonLabel, Button installButton, Button removeButton){
+        verifyOtherPartsStatus();
+        CountDownLatch cdl = new CountDownLatch(1);
+        installButton.setDisable(true);
+        progressBarSimulator.simulateProgress(salonProgressBar, CarProperties.SALON_ASSEMBLE_DELAY, cdl);
+        carPropertyUpdater.updateAfterSalonInstall(selectedSalon, removeButton, carSalonLabel, cdl);
+
+    }
+
+    public void removeSalon (ProgressBar salonProgressBar, Button installButton,  Label carSalonLabel, Button removeButton){
+        verifyOtherPartsStatus();
+        CountDownLatch cdl = new CountDownLatch(1);
+        removeButton.setDisable(true);
+        progressBarSimulator.simulateDownTimeProgress(salonProgressBar, CarProperties.SALON_RESEMBLE_DELAY, cdl);
+        carPropertyUpdater.updateAfterSalonRemove(installButton, carSalonLabel, cdl);
+    }
+
     public void verifyOtherPartsStatus(){
         if (ProgressBarSimulator.getStatus() == PartStatus.INSTALLING){
             throw new IncorrectResembleOrderException(Messages.PART_CANT_BE_INSTALLED_OR_REMOVED);
