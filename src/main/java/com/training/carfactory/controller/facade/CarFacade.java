@@ -2,9 +2,13 @@ package com.training.carfactory.controller.facade;
 
 import com.training.carfactory.controller.context.CarContext;
 import com.training.carfactory.model.entity.Car;
+import com.training.carfactory.model.entity.Engine;
 import com.training.carfactory.model.exception.PartIsMissingException;
+import com.training.carfactory.model.service.EngineService;
 import com.training.carfactory.model.service.impl.util.*;
 import javafx.scene.control.*;
+
+import java.util.List;
 
 
 public class CarFacade {

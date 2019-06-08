@@ -4,6 +4,7 @@ import com.training.carfactory.controller.context.CarContext;
 import com.training.carfactory.model.entity.Car;
 import com.training.carfactory.model.entity.Engine;
 import com.training.carfactory.model.entity.Wheels;
+import com.training.carfactory.model.exception.IncorrectPartException;
 import com.training.carfactory.model.service.BodyService;
 import com.training.carfactory.model.service.CarService;
 import com.training.carfactory.model.service.EngineService;
@@ -58,14 +59,22 @@ public class CarPropertyUpdater {
     }
 
     public void updateAfterEngineInstall(String selectedEngine, Button btn, Label engineCarLabel, CountDownLatch cdl) {
+        Engine engine = engineService.getByName(selectedEngine);
+        verifyEngineAndBodyAreComparable(engine);
         new Thread(() -> {
             await(cdl);
-            Engine engine = engineService.getByName(selectedEngine);
             carContext.getCar().setEngine(engine);
             carContext.getCar().setStatus(Car.Status.IN_PROGRESS);
             btn.setDisable(false);
             Platform.runLater(() -> engineCarLabel.setText(valueFormatterService.formatEngine(carContext.getCar().getEngine())));
         }).start();
+    }
+
+    private void verifyEngineAndBodyAreComparable(Engine engine) {
+        if(engine.getVolume() < carContext.getCar().getBody().getMinEngineVolume() ||
+                engine.getVolume() > carContext.getCar().getBody().getMaxEngineVolume()){
+            throw new IncorrectPartException(Messages.ENGINE_WAS_NOT_SUPPORTED);
+        }
     }
 
     public void updateAfterEngineRemove(Button btn, Label engineCarLabel, CountDownLatch cdl) {

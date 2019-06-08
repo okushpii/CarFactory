@@ -48,7 +48,7 @@ public class ApplicationContext {
         PartVerifier partVerifier = new PartVerifier();
         CarPropertyUpdater carPropertyUpdater = new CarPropertyUpdater(bodyService, engineService, wheelsService,
                 valueFormatterService, carService, priceCalculationService, carContext);
-        CarProgressService carProgressService = new CarProgressService(progressBarSimulator, carPropertyUpdater);
+        CarProgressService carProgressService = new CarProgressService(progressBarSimulator, carPropertyUpdater, carContext, engineService);
 
         ElementService elementService = new DefaultElementService(bodyService, engineService, wheelsService, carService, valueFormatterService);
 
