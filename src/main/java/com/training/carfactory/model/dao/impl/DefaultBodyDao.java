@@ -32,6 +32,8 @@ public class DefaultBodyDao implements BodyDao {
                 body.setType(Body.Type.valueOf(rs.getString(3)));
                 body.setPrice(rs.getLong(4));
                 body.setImageUrl(rs.getString(5));
+                body.setMinEngineVolume(rs.getLong(6));
+                body.setMaxEngineVolume(rs.getLong(7));
                 bodies.add(body);
             }
         } catch (SQLException e) {
@@ -53,6 +55,8 @@ public class DefaultBodyDao implements BodyDao {
                 body.setType(Body.Type.valueOf(rs.getString(3)));
                 body.setPrice(rs.getLong(4));
                 body.setImageUrl(rs.getString(5));
+                body.setMinEngineVolume(rs.getLong(6));
+                body.setMaxEngineVolume(rs.getLong(7));
                 return body;
             }
         } catch (SQLException e) {

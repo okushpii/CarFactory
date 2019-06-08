@@ -7,6 +7,8 @@ public class Body implements Part{
     private Type type;
     private Long price;
     private String imageUrl;
+    private Long minEngineVolume;
+    private Long maxEngineVolume;
 
     public enum Type{
         SEDAN,
@@ -14,12 +16,14 @@ public class Body implements Part{
         COUPE
     }
 
-    public Body(Long id, String name, Type type, Long price, String imageUrl) {
+    public Body(Long id, String name, Type type, Long price, String imageUrl, Long minEngineVolume, Long maxEngineVolume) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.price = price;
         this.imageUrl = imageUrl;
+        this.minEngineVolume = minEngineVolume;
+        this.maxEngineVolume = maxEngineVolume;
     }
 
     public Body(){
@@ -63,5 +67,21 @@ public class Body implements Part{
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Long getMinEngineVolume() {
+        return minEngineVolume;
+    }
+
+    public void setMinEngineVolume(Long minEngineVolume) {
+        this.minEngineVolume = minEngineVolume;
+    }
+
+    public Long getMaxEngineVolume() {
+        return maxEngineVolume;
+    }
+
+    public void setMaxEngineVolume(Long maxEngineVolume) {
+        this.maxEngineVolume = maxEngineVolume;
     }
 }

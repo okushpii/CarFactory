@@ -129,7 +129,7 @@
       <Button layoutX="14.0" layoutY="716.0" mnemonicParsing="false" onAction="#toWheelsStepPage" prefHeight="50.0" prefWidth="150.0" text="Back" />
       <Button layoutX="778.0" layoutY="716.0" mnemonicParsing="false" onAction="#toMenu" prefHeight="50.0" prefWidth="150.0" text="Main page" />
     </AnchorPane>
-    <Label fx:id="exceptionLabel" alignment="CENTER" layoutX="200.0" layoutY="549.0" maxHeight="50.0" prefWidth="400.0" text="" textAlignment="LEFT" textFill="RED">
+    <Label fx:id="exceptionLabel" alignment="CENTER" layoutX="248.0" layoutY="730.0" maxHeight="50.0" prefWidth="400.0" text="" textAlignment="LEFT" textFill="RED">
       <font>
         <Font size="18.0" />
       </font>

@@ -1,6 +1,7 @@
 package com.training.carfactory.model.service.impl.util;
 
 import com.training.carfactory.model.entity.Part;
+import com.training.carfactory.model.exception.IncorrectPartException;
 import com.training.carfactory.model.exception.IncorrectResembleOrderException;
 import com.training.carfactory.model.exception.PartIsMissingException;
 

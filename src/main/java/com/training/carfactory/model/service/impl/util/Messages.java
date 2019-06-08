@@ -12,5 +12,6 @@ public interface Messages {
     String CONNECTION_PROBLEM = "Some problems with connection";
     String PART_CANT_BE_INSTALLED_OR_REMOVED = "\"Part can`t be installed or removed now\"";
     String PART_CANT_BE_INSTALLED = "Part can`t be installed now";
+    String ENGINE_WAS_NOT_SUPPORTED = "Engine was not supported for this body ";
 }
 

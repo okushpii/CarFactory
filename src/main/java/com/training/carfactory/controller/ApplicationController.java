@@ -5,6 +5,7 @@ import com.training.carfactory.controller.facade.ApplicationFacade;
 import com.training.carfactory.controller.facade.CarFacade;
 import com.training.carfactory.model.entity.Car;
 import com.training.carfactory.model.exception.ConnectionFailedException;
+import com.training.carfactory.model.exception.IncorrectPartException;
 import com.training.carfactory.model.exception.IncorrectResembleOrderException;
 import com.training.carfactory.model.exception.PartIsMissingException;
 import com.training.carfactory.model.service.impl.util.Messages;
@@ -185,7 +186,7 @@ public class ApplicationController {
     public void installEngine() {
         try {
             carFacade.buildEngine(engineListView, engineProgress, installEngineButton, engineCarLabel, removeEngineButton);
-        } catch (PartIsMissingException | IncorrectResembleOrderException ex) {
+        } catch (PartIsMissingException | IncorrectResembleOrderException | IncorrectPartException ex) {
             exceptionLabel.setText(ex.getMessage());
         }
     }
