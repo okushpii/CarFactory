@@ -92,7 +92,8 @@ public class CarFacade {
 
     public void finishCar(ProgressBar carProgress, Button finishCarButton) {
         checkIfCarPresent();
-        partVerifier.verifyPartsPresent(carContext.getCar().getBody(), carContext.getCar().getEngine(), carContext.getCar().getWheels(), carContext.getCar().getSalon());
+        Car car = carContext.getCar();
+        partVerifier.verifyPartsPresent(car.getBody(), car.getEngine(), car.getWheels(), car.getSalon());
         carProgressService.buildCar(carProgress, finishCarButton);
     }
 
